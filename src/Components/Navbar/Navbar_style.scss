@@ -1,0 +1,39 @@
+.collapsible .content {
+  //padding: 6px;
+  //width: 10vh;
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: flex-end;
+}
+.collapsible .header {
+  background-color: #dddddd;
+  //padding: 6px;
+  //cursor: pointer;
+}
+
+.icons_nav {
+  font-size: 4.2rem;
+  text-align: right;
+}
+
+.content_nav {
+  font-size: 150%;
+}
+
+.items_nav {
+  margin: 3vh;
+  text-decoration: none;
+}
+
+.items_nav:hover {
+  background-color: white;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+li{
+  list-style: none;
+}
