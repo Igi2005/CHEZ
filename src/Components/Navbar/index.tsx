@@ -8,7 +8,7 @@ import {useCollapse} from "react-collapsed";
 export function Navbar(){
 
     const config = {
-        duration: 2000
+        duration: 1000
     };
 
     const { getCollapseProps, getToggleProps, isExpanded } = useCollapse(config);
@@ -22,7 +22,7 @@ export function Navbar(){
             <div className="content_nav">
                 {routes.map((route) => (
                         <li key={route.path} className="items_nav">
-                            <Link to={route.path} className="items_nav">{route.title}{route.icon}</Link>
+                            <Link to={route.path} className="items_nav2">{route.title}{route.icon}</Link>
                         </li>
                     )
                 )}

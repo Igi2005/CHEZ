@@ -18,15 +18,26 @@
 
 .content_nav {
   font-size: 150%;
+  font-weight: bolder;
+  border: 2px solid black;
+
 }
 
 .items_nav {
   margin: 3vh;
+  border: 1px solid black;
+
+}
+
+.items_nav2 {
   text-decoration: none;
+  color: black;
+  padding: 1vh;
 }
 
 .items_nav:hover {
-  background-color: white;
+  background-color: grey;
+  border: 1px solid lightblue;
 }
 
 .nav {

@@ -1,6 +1,6 @@
 
 export function Footer() {
     return (
-        <div></div>
+        <div>elo eloe elo </div>
     )
 }
