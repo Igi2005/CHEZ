@@ -1,0 +1,55 @@
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    height: 20vh;
+    background-color: #1a1a1a;
+    width: 100%;
+}
+
+.footerLeft {
+    display: flex;
+    flex-wrap: wrap;
+    width: 65%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.footerRight {
+    display: flex;
+    flex-wrap: wrap;
+    width: 35%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.customerService {
+    width: 50%;
+    height: 100%;
+    color: #fff;
+}
+
+.myAccount {
+    width: 50%;
+    height: 100%;
+    color: #fff;
+}
+
+p {
+    font-weight: bold;
+}
+
+.footerMenuUl {
+    list-style-type: disc;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #fff;
+}
