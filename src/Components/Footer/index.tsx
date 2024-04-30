@@ -1,11 +1,18 @@
 import "./footer_style.scss"
+import {BsFacebook, BsInstagram, BsTwitter} from "react-icons/bs";
+import {AiOutlineYoutube} from "react-icons/ai";
+
 
 
 export function Footer() {
     return (
         <div className="footer">
             <div className="footerLeft">
-                {/*linki do sociali i copyright */}
+                <a href="https://www.facebook.com/?locale=pl_PL" className="social_icons"><BsFacebook
+                    className="header_icons"/></a>
+                <a href="https://www.instagram.com/bambi.ofc/" className="social_icons"><BsInstagram className="header_icons"/></a>
+                <a href="https://www.youtube.com/watch?v=md4rmVv5qDU" className="social_icons"><AiOutlineYoutube className="header_icons"/></a>
+                <a href="https://twitter.com/home?lang=pl" className="social_icons"><BsTwitter className="header_icons"/></a>
             </div>
             <div className="footerRight"> 
                 <div className="customerService"> 
