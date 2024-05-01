@@ -8,8 +8,6 @@ export function Header() {
             <div id="left">
                 <img src={logo} id="logo_photo"/>
                 <h1 id="app_name">NAZWA STRONY CZY COS</h1>
-
-
             </div>
             <div id="right">
                 <Navbar/>
