@@ -1,11 +1,12 @@
 import  "./Main_style.scss"
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {SetStateAction, useEffect, useState} from "react"
+import axios from "axios"
 
 export function Main() {
     const [records, setRecords] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [names, setNames] = useState([]);
+    const [guns, setGuns] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -19,13 +20,16 @@ export function Main() {
 
     useEffect(() => {
         if (isDataLoaded) {
-            const namesArray = [];
-            for (let i = 0; i < 10; i++) {
+            const namesArray: SetStateAction<never[]> = [];
+            const namesGun: SetStateAction<never[]> = []
+            for (let i = 0; i < 40; i++) {
                 const randomIndex = Math.floor(Math.random() * records.length);
                 const record = records[randomIndex];
                 namesArray.push(record['image']);
+                namesGun.push(record['name'])
             }
             setNames(namesArray);
+            setGuns(namesGun)
         }
     }, [isDataLoaded, records]);
 
@@ -41,20 +45,28 @@ export function Main() {
         <div id="Loot">
             <div id="headerLoot">
                 {names.length > 0 ? (
-                    <div>
-                        <img
-                            src={names[currentIndex]}
-                            alt={`Zdjęcie ${currentIndex + 1}`}
-                            style={{ width: '20vh', height: 'auto' }}
-                        />
+                    <div id="header_photos">
+                        {Array.from({ length: 8 }).map((_, i) => {
+                            const index = (currentIndex + i) % names.length;
+                            return (
+                                <div id="one_photo">
+                                    <p className="nameOfGun">{guns[index]}</p>
+                                    <img
+                                        className="header_photos"
+                                        key={index}
+                                        src={names[index]}
+                                        alt={`Zdjęcie ${index + 1}`}
+                                        style={{width: '16vh', height: 'auto'}}
+                                    />
+                                </div>
+                            );
+                        })}
                     </div>
                 ) : (
                     <p>Ładowanie...</p>
                 )}
             </div>
-            <div id="mainLoot">
-
-            </div>
+            <div id="mainLoot"></div>
         </div>
     );
 }
