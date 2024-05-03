@@ -6,7 +6,7 @@ import {Error} from "../../Components/Error/index.tsx"
 import axios from "axios"
 import {Link} from "react-router-dom";
 import { BiSolidUserPlus } from "react-icons/bi";
-
+import { useNavigate } from 'react-router-dom';
 function LoginPage(){
 
     /*const [Useremail, setUseremail] = useState('')
@@ -14,7 +14,7 @@ function LoginPage(){
     const [IsUseremail, setIsUseremail] = useState(false)
     const [IsPassword, setIsPassword] = useState(false)
     const [Err,setErr] = useState(false)
-    const [Redirect, setRedirect] = useState(false)
+    const navigate = useNavigate();
     function Validation(e : React.ChangeEvent<any>){
         e.preventDefault()
         const {user_email,user_pass} = e.target.elements
@@ -23,18 +23,8 @@ function LoginPage(){
 
         const RegExp = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/i
 
-        if(email.length == 0 || !email.match(RegExp)) {
-            setIsUseremail(true)
-        }
-        else {
-            setIsUseremail(false)
-        }
-        if(pass.length == 0) {
-            setIsPassword(true)
-        }
-        else {
-            setIsPassword(false)
-        }
+        setIsUseremail(email.length === 0 || !email.match(RegExp));
+        setIsPassword(pass.length === 0);
 
         if(email.length > 0 && pass.length > 0) {
             const Data = {
@@ -48,9 +38,11 @@ function LoginPage(){
                     const message = res.data.msg;
                     console.log('Received message:', message);
                     if(message == "Pomyslnie zalogowano się!") {
-                        setRedirect(true)
+                        const nickName = res.data.user.nick
+                        navigate('/', { state: { nickName} });
                     }
-                    if(message == "Niestety podane dane nie zgadzają się!") {
+                    else if(message == "Niestety podane dane nie zgadzają się!") {
+                        console.log("zle dane essa")
                         setErr(true)
                     }
             })
