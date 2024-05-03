@@ -18,7 +18,7 @@ router.post('/login',async(req,res) =>{
             password : passB
         }
     });
-    if(getUniqueData) res.json({msg : "Pomyslnie zalogowano się!"})
+    if(getUniqueData) res.json({msg : "Pomyslnie zalogowano się!",user : {nick: getUniqueData.nick}})
     else res.json({msg : "Niestety podane dane nie zgadzają się!"})
 })
 
