@@ -1,7 +1,6 @@
 import  "./Main_style.scss"
 import {SetStateAction, useEffect, useState} from "react"
 import axios from "axios"
-import { useLocation } from 'react-router-dom';
 
 export function Main() {
     const [records, setRecords] = useState([]);
@@ -9,8 +8,8 @@ export function Main() {
     const [names, setNames] = useState([]);
     const [guns, setGuns] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
-    const location = useLocation();
-    const { nickName } = location.state || {};
+
+
 
     useEffect(() => {
         axios.get('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json')
@@ -70,7 +69,7 @@ export function Main() {
                 )}
             </div>
             <div id="mainLoot"><h1>Witaj!</h1>
-                <p>Email: {nickName}</p>
+
                 </div>
 
         </div>

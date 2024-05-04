@@ -5,6 +5,7 @@ import "./Navbar_style.scss"
 import {TiThMenuOutline} from "react-icons/ti";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import {useCollapse} from "react-collapsed";
+import {CiLogin} from "react-icons/ci";
 export function Navbar(){
 
     const config = {
@@ -26,6 +27,9 @@ export function Navbar(){
                         </li>
                     )
                 )}
+                <li className="items_nav">
+                    <Link to="/" className="items_nav2">Wyloguj sie<CiLogin /></Link>
+                </li>
             </div>
         </div>
     </div>

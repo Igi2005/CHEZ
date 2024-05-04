@@ -7,6 +7,7 @@ import { IoCreateOutline } from "react-icons/io5";
 import { GrDomain } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
 import UserData from "../Pages/UserData";
+
 interface RouteElement {
     element: React.JSX.Element
     icon?: React.JSX.Element
@@ -39,5 +40,4 @@ export const routes: Array<RouteElement> = [
         title: "Data user",
         icon: <FaUser />
     }
-
 ]
