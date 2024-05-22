@@ -18,21 +18,20 @@
   height: 10vh;
   margin-left: 4vh;
   margin-right: 4vh;
+  filter: blur(0.5px);
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .header_icons {
   margin: 0.5vh;
   font-size: 2.5rem;
-
-}
-
-.header_icons:hover {
-  //background-color: lightgreen;
 }
 
 #left {
   display: flex;
   width: 60%;
+  position: relative;
 }
 
 #right {
@@ -54,3 +53,5 @@
   display: flex;
   justify-content: center;
 }
+
+//<img src={logo} id="logo_photo"/>

@@ -58,7 +58,7 @@ export function Main() {
                                         key={index}
                                         src={names[index]}
                                         alt={`Zdjęcie ${index + 1}`}
-                                        style={{width: '16vh', height: 'auto'}}
+                                        style={{width: '15vh', height: 'auto'}}
                                     />
                                 </div>
                             );
