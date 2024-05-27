@@ -1,14 +1,25 @@
-.collapsible .content {
-  //padding: 6px;
-  //width: 10vh;
-  background-color: hotpink;
-  display: flex;
-  justify-content: flex-end;
+.collapsible {
+  position: relative; /* Ustaw relatywną pozycję, aby elementy potomne mogły być absolutnie pozycjonowane w odniesieniu do tego kontenera */
 }
+
+.collapsible .content {
+  display: none; /* Domyślnie ukryj zawartość menu rozwijanego */
+  position: absolute; /* Ustaw absolutną pozycję, aby menu rozwijane było poza normalnym przepływem dokumentu */
+  top: 100%; /* Umieść menu rozwijane pod nagłówkiem */
+  left: 0;
+  width: 100%;
+  z-index: 1; /* Ustaw wyższy indeks, aby menu było na wierzchu */
+  background-color: rgba(255, 105, 180, 0.9); /* Kolor tła z przeźroczystością */
+}
+
+.collapsible.active .content {
+  display: flex; /* Po kliknięciu pokaż zawartość menu rozwijanego */
+  flex-direction: column; /* Ustawiony na kolumnę, aby elementy były ułożone jeden pod drugim */
+}
+
 .collapsible .header {
+  cursor: pointer;
   background-color: #dddddd;
-  //padding: 6px;
-  //cursor: pointer;
 }
 
 .icons_nav {
@@ -18,15 +29,13 @@
 
 .content_nav {
   font-size: 150%;
-  font-weight: bolder;
+  font-weight: bold;
   border: 2px solid black;
-
 }
 
 .items_nav {
   margin: 3vh;
   border: 1px solid black;
-
 }
 
 .items_nav2 {
@@ -46,8 +55,3 @@
   display: flex;
   justify-content: flex-end;
 }
-
-li{
-  list-style: none;
-}
-

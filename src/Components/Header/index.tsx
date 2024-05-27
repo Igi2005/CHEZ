@@ -12,7 +12,7 @@ export function Header() {
         <div className="header">
             <div id="left">
                 <img src={logo} id="logo_photo" alt="logo"/>
-                <h1 id="app_name">NAZWA STRONY CZY COS</h1>
+                <h1 id="app_name">Małpie skrzynie</h1>
             </div>
             <div id="right">
             {nickName ? (
