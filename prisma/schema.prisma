@@ -8,10 +8,43 @@ datasource db {
 }
 
 model users {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(50)
-  surname  String @db.VarChar(50)
-  nick     String @unique(map: "nick") @db.VarChar(50)
-  email    String @unique(map: "email") @db.VarChar(50)
-  password String @db.VarChar(50)
+  id        Int         @id @default(autoincrement())
+  name      String      @unique(map: "name") @db.VarChar(50)
+  surname   String      @unique(map: "surname") @db.VarChar(50)
+  email     String      @unique(map: "email") @db.VarChar(50)
+  password  String      @unique(map: "password") @db.VarChar(50)
+  balans    Int
+  ekwipunek ekwipunek[]
+}
+
+model ekwipunek {
+  id_usera Int
+  id_broni Int
+  users    users  @relation(fields: [id_usera], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_1")
+  images   images @relation(fields: [id_broni], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_2")
+
+  @@id([id_usera, id_broni])
+  @@index([id_broni], map: "id_broni")
+}
+
+model images {
+  id        Int         @id @default(autoincrement())
+  name      String?     @db.VarChar(255)
+  img       String?     @db.VarChar(255)
+  ekwipunek ekwipunek[]
+}
+
+model skrzynkibronie {
+  id_skrzyni Int
+  id_broni   Int
+
+  @@id([id_skrzyni, id_broni])
+  @@index([id_broni], map: "id_broni")
+}
+
+model skrzynki {
+  id_skrzynki Int     @id @default(autoincrement())
+  nazwa       String  @db.VarChar(255)
+  cena        Decimal @db.Decimal(10, 2)
+  img         String  @db.Text
 }

@@ -1,0 +1,21 @@
+use projekt;
+
+drop table skrzynki;
+
+CREATE TABLE `skrzynki` (
+  `id_skrzynki` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `nazwa` varchar(255) NOT NULL,
+  `cena` decimal(10,2) NOT NULL,
+  `img` text not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `skrzynki` (`id_skrzynki`, `nazwa`, `cena`, `img`) VALUES
+(1, 'Skrzynia Małpy', 659.00, 'https://media.discordapp.net/attachments/768438719828983838/1244261254038814802/box1.png?ex=66547818&is=66532698&hm=8e14bb0bd62e2399c6cffa4c3ec03e6b7d1f10279502def9e3480ad00d600262&=&format=webp&quality=lossless&width=676&height=676'),
+(2, 'Skrzynia Bambi', 224.00, 'https://media.discordapp.net/attachments/768438719828983838/1244261254533611520/box2.png?ex=6655c998&is=66547818&hm=0cb1402d09ffae294ff1fd8c6e6a5386a78203332fa7e7d4eaec8ddf18ff1547&=&format=webp&quality=lossless&width=676&height=676'),
+(3, 'Skrzynia Psiaka', 125.00, 'https://media.discordapp.net/attachments/768438719828983838/1244261255024349214/box3.png?ex=6655c998&is=66547818&hm=cf0a95b669d95ff45708bfba03a7439552c62c31c1d53428b8b0da4a5031f1a7&=&format=webp&quality=lossless&width=676&height=676'),
+(4, 'Skrzynia Kota', 936.00, 'https://media.discordapp.net/attachments/768438719828983838/1244261255657554011/box4.png?ex=6655c998&is=66547818&hm=402593b89aa47088571f292aea2672164a8208d4c142a130d68c098acb0238cc&=&format=webp&quality=lossless&width=676&height=676'),
+(5, 'Skrzynia Delfina',00, 'https://media.discordapp.net/attachments/879815487163363328/1244569847682170880/lootbox_with_do_d3601f00-8a3c-42db-b461-a1e132d502c6.png?ex=6655977e&is=665445fe&hm=3d651228b29276c80e86350e5d45b65d2c0eba949025add44d522b6a93bb3f05&=&format=webp&quality=lossless&width=676&height=676'),
+(6, 'Skrzynia Psiaka premium', 815.00, 'https://media.discordapp.net/attachments/879815487163363328/1244569847031926917/lootbox_with_do_1c31f610-100f-4d3b-bce0-7b8a9e7e100c.png?ex=6655977e&is=665445fe&hm=7db99db52b65968cf18d1109d286830bf9781e1778a7e714f81199b951677f46&=&format=webp&quality=lossless&width=676&height=676'),
+(7, 'Skrzynia Pandy Aleksa', 100.00, 'https://media.discordapp.net/attachments/879815487163363328/1244569848265052200/lootbox_with_pa_594e05c7-a37d-458d-af55-5eca5afe2ff8.png?ex=6655977e&is=665445fe&hm=934ae520263ba66f7086d27c00d7631d0b8427df00e746605cb4fa0b1568c4cc&=&format=webp&quality=lossless&width=676&height=676'),
+(8, 'Skrzynia Krowy', 29.00, 'https://media.discordapp.net/attachments/879815487163363328/1244569848693129278/lootbox_with_co_269cc387-6359-4569-9013-f262a1e8226b.png?ex=6655977e&is=665445fe&hm=6406d0f38c11093f5b6ec02a89f46d098484c88fad659de42cf81af0a23cde0c&=&format=webp&quality=lossless&width=676&height=676'),
+(9, 'Skrzynia Niewiadomo czego', 828.00, 'https://media.discordapp.net/attachments/879815487163363328/1244569850379108435/lootbox_with_ju_850e231d-65ba-4b3d-99bf-807461fd98d5.png?ex=6655977f&is=665445ff&hm=6e1ee0d1eb3772fa5227a54593341d56b0d5f43cb1992c021a0e48c23b082ad4&=&format=webp&quality=lossless&width=676&height=676')
