@@ -1,5 +1,11 @@
+import { Header } from "../../Components/Header"
+
+
 export function OpenBox() {
     return (
-        <div></div>
+        <div>
+            <Header/>
+            
+        </div>
     )
 }

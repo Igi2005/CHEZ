@@ -7,7 +7,7 @@ import { IoCreateOutline } from "react-icons/io5";
 import { GrDomain } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
 import UserData from "../Pages/UserData";
-
+import { OpenBox } from '../Pages/OpenBox';
 interface RouteElement {
     element: React.JSX.Element
     icon?: React.JSX.Element
@@ -39,5 +39,10 @@ export const routes: Array<RouteElement> = [
         element: <UserData/>,
         title: "Data user",
         icon: <FaUser />
+    },
+    {
+        path: "/openbox",
+        element: <OpenBox/>,
+        title: "Otwórz skrzynie!",
     }
 ]
