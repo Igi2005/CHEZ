@@ -26,10 +26,6 @@ export function Navbar(){
                         <Link to={route.path} className="items_nav2">{route.title}{route.icon}</Link>
                     </li>
                 ))}
-                <li className="items_nav">
-                    <Link to="/" className="items_nav2">Wyloguj sie<CiLogin /></Link>
-
-                </li>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 import  "./Main_style.scss"
 import {SetStateAction, useEffect, useState} from "react"
 import axios from "axios"
-
+import { useNavigate } from 'react-router-dom';
 
 export function Main() {
     const [records, setRecords] = useState([]);
@@ -10,6 +10,7 @@ export function Main() {
     const [guns, setGuns] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:3000/')
@@ -90,6 +91,10 @@ export function Main() {
         console.log(data)
     }
 
+    function OpenBox() {
+        navigate('/openbox');
+    }
+
     return (
         <div id="Loot">
             <div id="headerLoot">
@@ -127,7 +132,7 @@ export function Main() {
             {data.length > 0 ? (
                 <ul className="lootBoxContainer">
                     {data.map(item => (
-                        <div className="lootBox" key={item.id_skrzynki}>
+                        <div className="lootBox" key={item.id_skrzynki} onClick={OpenBox}>
                             <img src={item.img} alt={item.nazwa} />
                             <p>{item.nazwa} | {item.cena}</p>
                         </div>
