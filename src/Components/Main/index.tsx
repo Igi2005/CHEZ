@@ -91,8 +91,8 @@ export function Main() {
         console.log(data)
     }
 
-    function OpenBox() {
-        navigate('/openbox');
+    function OpenBox(index:number) {
+        navigate('/openbox',{ state: { index} });
     }
 
     return (
@@ -132,7 +132,7 @@ export function Main() {
             {data.length > 0 ? (
                 <ul className="lootBoxContainer">
                     {data.map(item => (
-                        <div className="lootBox" key={item.id_skrzynki} onClick={OpenBox}>
+                        <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
                             <img src={item.img} alt={item.nazwa} />
                             <p>{item.nazwa} | {item.cena}</p>
                         </div>
