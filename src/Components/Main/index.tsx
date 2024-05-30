@@ -3,6 +3,7 @@ import {SetStateAction, useEffect, useState} from "react"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
+
 export function Main() {
     const [records, setRecords] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -11,7 +12,7 @@ export function Main() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         axios.get('http://localhost:3000/')
             .then(response => {
@@ -26,7 +27,7 @@ export function Main() {
                 console.error('Błąd serwera: ', error.message);
             });
     }, []);
-    //console.log(data)
+    console.log(data)
 
     useEffect(() => {
         axios.get('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json')
