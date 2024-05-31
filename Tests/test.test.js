@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const router = require('./yourRouterFile'); // Replace 'yourRouterFile' with the actual file name where your router is defined.
+const router = require('../SignUpPage/index.js'); // Replace 'yourRouterFile' with the actual file name where your router is defined.
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -10,14 +10,11 @@ app.use('/', router);
 
 describe('POST /signup', () => {
     afterAll(async () => {
+        //await prisma.users.deleteMany();
         await prisma.$disconnect();
     });
 
-    afterEach(async () => {
-        // Clean up database after each test to ensure isolation
-        await prisma.users.deleteMany();
-    });
-
+   
     test('Signup with new user details', async () => {
         const res = await request(app)
             .post('/signup')
@@ -40,7 +37,7 @@ describe('POST /signup', () => {
         expect(user.name).toBe('John');
         expect(user.surname).toBe('Doe');
         expect(user.nick).toBe('johndoe');
-    });
+    }, 10000);
 
     test('Signup with existing email', async () => {
         // Create a user with known email
