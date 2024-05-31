@@ -1,14 +1,13 @@
-import  "./Main_style.scss"
-import {SetStateAction, useEffect, useState} from "react"
-import axios from "axios"
-import { useNavigate } from 'react-router-dom';
-
+import "./Main_style.scss";
+import { SetStateAction, useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function Main() {
     const [records, setRecords] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [names, setNames] = useState([]);
-    const [guns, setGuns] = useState([])
+    const [guns, setGuns] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
@@ -27,7 +26,7 @@ export function Main() {
                 console.error('Błąd serwera: ', error.message);
             });
     }, []);
-    console.log(data)
+    console.log(data);
 
     useEffect(() => {
         axios.get('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json')
@@ -42,15 +41,15 @@ export function Main() {
     useEffect(() => {
         if (isDataLoaded) {
             const namesArray: SetStateAction<never[]> = [];
-            const namesGun: SetStateAction<never[]> = []
+            const namesGun: SetStateAction<never[]> = [];
             for (let i = 0; i < 40; i++) {
                 const randomIndex = Math.floor(Math.random() * records.length);
                 const record = records[randomIndex];
                 namesArray.push(record['image']);
-                namesGun.push(record['name'])
+                namesGun.push(record['name']);
             }
             setNames(namesArray);
-            setGuns(namesGun)
+            setGuns(namesGun);
         }
     }, [isDataLoaded, records]);
 
@@ -63,55 +62,56 @@ export function Main() {
     }, [names.length]);
 
     function SortAsc() {
-        console.log("data----------------- " + data)
-        console.log(data[1].cena)
-        for(let i=0; i < data.length - 1;i++) {
-            for(let j=0; j < data.length - 1; j++) {
-                if(Number(data[j].cena) < Number(data[j+1].cena)) {
+        console.log("data----------------- " + data);
+        console.log(data[1].cena);
+        for (let i = 0; i < data.length - 1; i++) {
+            for (let j = 0; j < data.length - 1; j++) {
+                if (Number(data[j].cena) < Number(data[j + 1].cena)) {
                     let temp = data[j];
                     data[j] = data[j + 1];
                     data[j + 1] = temp;
                 }
             }
         }
-        console.log(data)
+        console.log(data);
     }
 
     function SortDesc() {
-        console.log("data----------------- " + data)
-        console.log(data[1].cena)
-        for(let i=0; i < data.length - 1;i++) {
-            for(let j=0; j < data.length - 1; j++) {
-                if(Number(data[j].cena) > Number(data[j+1].cena)) {
+        console.log("data----------------- " + data);
+        console.log(data[1].cena);
+        for (let i = 0; i < data.length - 1; i++) {
+            for (let j = 0; j < data.length - 1; j++) {
+                if (Number(data[j].cena) > Number(data[j + 1].cena)) {
                     let temp = data[j];
                     data[j] = data[j + 1];
                     data[j + 1] = temp;
                 }
             }
         }
-        console.log(data)
+        console.log(data);
     }
 
     function OpenBox(index:number) {
         navigate('/openbox',{ state: { index} });
     }
+    // Get a random crate image URL
+    const randomCrateImage = names.length > 0 ? names[Math.floor(Math.random() * names.length)] : '';
 
     return (
         <div id="Loot">
             <div id="headerLoot">
                 {names.length > 0 ? (
                     <div id="header_photos">
-                        {Array.from({length: 8}).map((_, i) => {
+                        {Array.from({ length: 6 }).map((_, i) => {
                             const index = (currentIndex + i) % names.length;
                             return (
-                                <div id="one_photo">
+                                <div id="one_photo" key={index}>
                                     <p className="nameOfGun">{guns[index]}</p>
                                     <img
                                         className="header_photos"
-                                        key={index}
                                         src={names[index]}
                                         alt={`Zdjęcie ${index + 1}`}
-                                        style={{width: '15vh', height: 'auto'}}
+                                        style={{ width: '15vh', height: 'auto' }}
                                     />
                                 </div>
                             );
@@ -120,15 +120,29 @@ export function Main() {
                 ) : (
                     <p>Ładowanie...</p>
                 )}
-                
-                <div id="headerLootRight">TUTAJ ROB CO CHCESZ</div>
+
+                <div id="headerLootRight">
+                    {randomCrateImage && (
+                        <div className="randomCrateContainer">
+                            <img
+                                src={randomCrateImage}
+                                alt="Random Crate"
+                                className="randomCrateImage"
+                            />
+                            <div className="overlayText">
+                                {/* Ten skin może być twój */}
+                                Ten skin może być twój
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
             <div id="mainLoot">
                 <div id="sort">
                     <button id="desc" onClick={SortAsc}>Od najdroższych</button>
                     <button id="asc" onClick={SortDesc}>Od najtańszych</button>
                     <button id="avaible">Dostępne do kupienia</button>
-                    <hr/>
+                    <hr />
                 </div>
             {data.length > 0 ? (
                 <ul className="lootBoxContainer">
