@@ -9,17 +9,19 @@ datasource db {
 
 model users {
   id        Int         @id @default(autoincrement())
-  name      String      @unique(map: "name") @db.VarChar(50)
-  surname   String      @unique(map: "surname") @db.VarChar(50)
+  name      String      @db.VarChar(50)
+  surname   String      @db.VarChar(50)
   email     String      @unique(map: "email") @db.VarChar(50)
-  password  String      @unique(map: "password") @db.VarChar(50)
-  balans    Int
+  password  String      @db.VarChar(50)
+  balans    Int         @default(100)
+  nick      String      @unique(map: "nickname") @db.Text
   ekwipunek ekwipunek[]
 }
 
 model ekwipunek {
   id_usera Int
   id_broni Int
+  cena     Float  @db.Float
   users    users  @relation(fields: [id_usera], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_1")
   images   images @relation(fields: [id_broni], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_2")
 
