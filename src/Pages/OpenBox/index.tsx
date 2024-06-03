@@ -14,7 +14,7 @@ export function OpenBox() {
     const [skrzynka, setSkrzynka] = useState({});
     const [bronie, setBronie] = useState([]);
     const [test, setTest] = useState(null);
-    const [balans, setBalas] = useState(null)
+    const [balans, setBalas] = useState<null | number>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [animationActive, setAnimationActive] = useState(false);
     const [act,setAct] = useState(false)
@@ -42,11 +42,13 @@ export function OpenBox() {
             const pElement = tempElement.querySelector('p');
     
             if (pElement) {
-                const textContent = pElement.textContent; // This will give you 'P250 | Asiimov'
-                console.log("wylosowana bron to " + textContent);
-                // Do something with the textContent
+                const textContent = pElement.textContent; 
+                //console.log("wylosowana bron to " + textContent);
                 setWin(textContent)
                 console.log("win to " + win)
+                //alert("you won " + win)
+                //window.location.reload();
+
             }
         }
     });
@@ -56,7 +58,7 @@ export function OpenBox() {
             if (response.data) {
                 setTest(response.data.data)
                 setBalas(response.data.balans)
-                console.log("nick zalogowanego to openBOX " + response.data.data);
+                //console.log("nick zalogowanego to openBOX " + response.data.data);
                 
             } else {
                 console.error('Błąd w bazie danych');
@@ -84,28 +86,49 @@ export function OpenBox() {
         backgroundImage: `url(${backgroundImage})`,
       };
 
-      console.log("balans to " + balans + "cena to "  + skrzynka.cena)
-    const startAnimation = () => {
+    //console.log("balans to " + balans + "cena to "  + skrzynka.cena)
+    function startAnimation(){
         if(Number(balans) >= skrzynka.cena) {
+            const saldo:number = balans - skrzynka.cena;
+            setBalas(saldo);
+            console.log("-------------->" + saldo)
+            const Data = {
+                Balans : saldo
+            }
+            axios.post("http://localhost:3000/newsaldo", Data )
+            .then(response => {
+                console.log("Response:", response.data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+            
             setAnimationActive(true);
-            let currentInterval = 100; 
+            let currentInterval = 1; 
             let animationStartTime = Date.now();
             const animate = () => {
                 setCurrentIndex((prevIndex) => (prevIndex + 1) % names.length);
                 //console.log("interval to " + currentInterval);
+                console.log("new balans to " + saldo);
                 const elapsedTime = Date.now() - animationStartTime;
                 if (elapsedTime < 10000) { 
-                    currentInterval+=100
+                    if(currentInterval < 100) {
+                        currentInterval+=1;
+                    }
+                    if(currentInterval >= 100) {
+                        currentInterval+=100;
+                    }
                     setTimeout(animate, currentInterval);
                 } 
-                if(elapsedTime == 10000) {
+                if(elapsedTime === 10000) {
                     setAnimationActive(false); 
                 }
             };
             animate();
         }
-        
-    };
+    }
+    
+    
 
     return (
         <div>

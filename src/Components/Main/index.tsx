@@ -3,6 +3,13 @@ import { SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+interface Gun {
+    id_skrzynki: number;
+    img: string;
+    nazwa: string;
+    cena: number;
+}
+
 export function Main() {
     const [records, setRecords] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -10,7 +17,10 @@ export function Main() {
     const [guns, setGuns] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [data, setData] = useState([]);
+    const [balans, setBalans] = useState([])
+    const [guns2, setGuns2] = useState<Gun[]>([]);
     const navigate = useNavigate();
+    const [choice,setChoice] = useState(true)
     
     useEffect(() => {
         axios.get('http://localhost:3000/')
@@ -26,7 +36,7 @@ export function Main() {
                 console.error('Błąd serwera: ', error.message);
             });
     }, []);
-    console.log(data);
+    //console.log(data);
 
     useEffect(() => {
         axios.get('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json')
@@ -62,6 +72,7 @@ export function Main() {
     }, [names.length]);
 
     function SortAsc() {
+        
         console.log("data----------------- " + data);
         console.log(data[1].cena);
         for (let i = 0; i < data.length - 1; i++) {
@@ -73,12 +84,12 @@ export function Main() {
                 }
             }
         }
-        console.log(data);
+        //console.log(data);
+        setChoice(true)
     }
 
     function SortDesc() {
-        console.log("data----------------- " + data);
-        console.log(data[1].cena);
+        
         for (let i = 0; i < data.length - 1; i++) {
             for (let j = 0; j < data.length - 1; j++) {
                 if (Number(data[j].cena) > Number(data[j + 1].cena)) {
@@ -88,13 +99,40 @@ export function Main() {
                 }
             }
         }
-        console.log(data);
+        setChoice(true)
+    }
+    const help: Gun[] = [];
+    function Avaible() {
+        
+        axios.get('http://localhost:3000/openbox')
+        .then(res => {
+            setBalans(res.data.balans)
+            console.log(balans)
+        })
+        .catch(err => console.log(err));
+        //const help: Gun[] = [];
+        for(let i = 0; i < data.length;i++) {
+            console.log(data[i].cena)
+            if(Number(balans) >= Number(data[i].cena)) {
+                help.push({
+                    id_skrzynki: data[i].id_skrzynki,
+                    img: data[i].img,
+                    nazwa: data[i].nazwa,
+                    cena: data[i].cena
+                });
+            } 
+        }
+        //console.log(help)
+        setGuns2(help);
+        //console.log(guns2)
+        setChoice(false)
+        
     }
 
     function OpenBox(index:number) {
         navigate('/openbox',{ state: { index} });
     }
-    // Get a random crate image URL
+    
     const randomCrateImage = names.length > 0 ? names[Math.floor(Math.random() * names.length)] : '';
 
     return (
@@ -141,21 +179,37 @@ export function Main() {
                 <div id="sort">
                     <button id="desc" onClick={SortAsc}>Od najdroższych</button>
                     <button id="asc" onClick={SortDesc}>Od najtańszych</button>
-                    <button id="avaible">Dostępne do kupienia</button>
+                    <button id="avaible" onClick={Avaible}>Dostępne do kupienia</button>
                     <hr />
                 </div>
-            {data.length > 0 ? (
-                <ul className="lootBoxContainer">
-                    {data.map(item => (
-                        <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
-                            <img src={item.img} alt={item.nazwa} />
-                            <p>{item.nazwa} | {item.cena}</p>
-                        </div>
-                    ))}
-                </ul>
-            ) : (
-                <p>Trwa ładowanie danych...</p>
-            )}
+                {choice ? (
+                    data.length > 0 ? (
+                        <ul className="lootBoxContainer">
+                            {data.map(item => (
+                                <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                                    <img src={item.img} alt={item.nazwa} />
+                                    <p>{item.nazwa} | {item.cena}</p>
+                                </div>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>Trwa ładowanie danych...</p>
+                    )
+                ) : (
+                    guns2.length > 0 ? (
+                        <ul className="lootBoxContainer">
+                            {guns2.map(item => (
+                                <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                                    <img src={item.img} alt={item.nazwa} />
+                                    <p>{item.nazwa} | {item.cena}</p>
+                            </div>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>Zaloguj sie!</p>
+                    )
+                )}
+
         </div>
 
         </div>
