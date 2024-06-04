@@ -21,7 +21,6 @@ model users {
 model ekwipunek {
   id_usera Int
   id_broni Int
-  cena     Float  @db.Float
   users    users  @relation(fields: [id_usera], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_1")
   images   images @relation(fields: [id_broni], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_2")
 
@@ -33,7 +32,15 @@ model images {
   id        Int         @id @default(autoincrement())
   name      String?     @db.VarChar(255)
   img       String?     @db.VarChar(255)
+  cena      Int?
   ekwipunek ekwipunek[]
+}
+
+model skrzynki {
+  id_skrzynki Int     @id @default(autoincrement())
+  nazwa       String  @db.VarChar(255)
+  cena        Decimal @db.Decimal(10, 2)
+  img         String  @db.Text
 }
 
 model skrzynkibronie {
@@ -44,9 +51,13 @@ model skrzynkibronie {
   @@index([id_broni], map: "id_broni")
 }
 
-model skrzynki {
-  id_skrzynki Int     @id @default(autoincrement())
-  nazwa       String  @db.VarChar(255)
-  cena        Decimal @db.Decimal(10, 2)
-  img         String  @db.Text
+model users {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(50)
+  surname   String      @db.VarChar(50)
+  email     String      @unique(map: "email") @db.VarChar(50)
+  password  String      @db.VarChar(50)
+  balans    Int         @default(100)
+  nick      String      @unique(map: "nickname") @db.VarChar(50)
+  ekwipunek ekwipunek[]
 }

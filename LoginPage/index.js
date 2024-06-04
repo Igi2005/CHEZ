@@ -8,10 +8,24 @@ router.use(express.json())
 router.use(express.urlencoded({extended: true}))
 let globalNick = null
 let globalBalans = null
+let globalId = null
 
 router.get('/openbox',async(req,res) => {
-    console.log("openbox")
+    //console.log("openbox")
     res.json({data : globalNick, balans : globalBalans})
+})
+
+router.post('/newsaldo',async(req,res) => {
+    console.log("id to " + globalId)
+    const newBalans = req.body.Balans;
+    globalBalans = Number(newBalans)
+    console.log("newbalans to " + globalBalans)
+    const updatedUser = await prisma.users.update({
+        where: { id: globalId },
+        data: {
+            balans: newBalans
+        }
+    });
 })
 
 router.post('/login',async(req,res) =>{
@@ -28,6 +42,7 @@ router.post('/login',async(req,res) =>{
     if(getUniqueData){
         globalNick = getUniqueData.name
         globalBalans = getUniqueData.balans
+        globalId = getUniqueData.id
         res.json({msg : "Pomyslnie zalogowano się!",user : {nick: getUniqueData.nick}, })
     } 
     else res.json({msg : "Niestety podane dane nie zgadzają się!"})
