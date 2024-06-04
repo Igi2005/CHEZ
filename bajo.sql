@@ -420,7 +420,7 @@ ALTER TABLE `skrzynkibronie`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `nickname` (`nick`) USING HASH;
+  ADD UNIQUE KEY `nick` (`nick`) USING HASH;
 
 --
 -- AUTO_INCREMENT dla zrzuconych tabel

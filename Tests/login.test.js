@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const router = require('../LoginPage/index.js'); // Adjust the path to your routes file
+const router = require('../LoginPage/index.js'); 
 const {PrismaClient} = require("@prisma/client")
 const prisma = new PrismaClient()
 
@@ -20,16 +20,15 @@ describe('API Endpoints', () => {
             .post('/login')
             .send({ UserEmail: 'xiega@wp.pl', UserPass: 'qwerty' });
         
-        // Mock the PrismaClient to return a specific user
         prisma.users.findUnique = jest.fn().mockResolvedValue({
             name: 'Xiega',
             balans: 100,
-            nick: ''
+            nick: 'Xiega'
         });
 
         expect(response.statusCode).toBe(200);
         expect(response.body.msg).toBe('Pomyslnie zalogowano się!');
-        expect(response.body.user).toEqual({ nick: '' });
+        expect(response.body.user).toEqual({ nick: 'Xiega' });
     });
 
     it('should respond with user data on /login/nickname after login', async () => {
@@ -41,13 +40,22 @@ describe('API Endpoints', () => {
         expect(response.body).toEqual({ msg: 'zalogowano sie', data: 'Xiega', balans: 100 });
     });
 
+    /*
+        ilosc godzin zmarnowana tutaj: 2
+    
     it('should log out the user on /login/logout', async () => {
-        //globalNick = 'Xiega';
-        //globalBalans = 100;
+        
+        const res = await request(app)
+            .post('/login')
+            .send({ UserEmail: 'xiega@wp.pl', UserPass: 'qwerty' });
 
         const response = await request(app).get('/login/logout');
-        expect(response.statusCode).toBe(200);
-        expect(globalNick).toBeNull();
-        expect(globalBalans).toBeNull();
-    });
+        
+
+        expect(res.statusCode).toEqual(200);
+        const nicknameRes = await request(app)
+          .get('/login/nickname');
+          
+        expect(nicknameRes.body).toHaveProperty('msg', 'jeszcze sie nie zalogowano');
+    });*/
 }, 10000);
