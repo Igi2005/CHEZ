@@ -28,6 +28,18 @@ router.post('/newsaldo',async(req,res) => {
     });
 })
 
+router.post('/adddata',async(req,res) => {
+    console.log("-----------------------------------------")
+    console.log(req.body.item)
+    const id = req.body.item.id
+    const insertData = await prisma.ekwipunek.create({
+        data : {
+            id_usera : globalId,
+            id_broni : id
+        }
+    })
+})
+
 router.post('/login',async(req,res) =>{
     console.log("mamy req")
     var emailB = String(req.body.UserEmail)

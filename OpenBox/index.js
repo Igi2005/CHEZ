@@ -31,7 +31,7 @@ router.get('/openbox/:id',async(req,res)=>{
             }
         }
     }
-
+    //console.log(data)
     res.json({data : data, img : getBoxImage})
 })
 
