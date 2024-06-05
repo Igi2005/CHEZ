@@ -64,7 +64,7 @@ function LoginPage(){
                     <input type="password" placeholder="Podaj hasło" name="user_pass" />
                     <RiLockPasswordFill className="icons"/>
                 </div>
-                {IsPassword && <Error message="Nie można podać pustej nazwy użytkowinika"></Error>}
+                {IsPassword && <Error message="Podano złe haslo!"></Error>}
                 <input type="submit" value="Zaloguj sie" id="login_btn"/>
                 <div className="create_acc">
                     <Link to="/signup" id="create_acc">Stwórz konto!<BiSolidUserPlus id="create_icon" /></Link>

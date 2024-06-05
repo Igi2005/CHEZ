@@ -21,7 +21,7 @@ export function Navbar(){
         </div>
         <div {...getCollapseProps()}>
             <div className="content_nav">
-                {routes.filter(route => route.path !== '/').map((route) => (
+                {routes.map((route) => (
                     <li key={route.path} className="items_nav">
                         <Link to={route.path} className="items_nav2">{route.title}{route.icon}</Link>
                     </li>
