@@ -55,3 +55,37 @@
   display: flex;
   justify-content: flex-end;
 }
+
+/* Media Queries for mobile */
+@media (max-width: 768px) {
+  .collapsible .content {
+    position: static; /* Ensure dropdown content stays within normal document flow */
+    width: 100%;
+    background-color: rgba(255, 105, 180, 0.9); /* Ensure background color for dropdown */
+  }
+
+  .icons_nav {
+    font-size: 3rem; /* Adjust icon size for mobile */
+    text-align: center; /* Center align icons */
+  }
+
+  .content_nav {
+    font-size: 120%; /* Adjust font size for mobile */
+  }
+
+  .items_nav {
+    margin: 2vh 0; /* Reduce margin for mobile */
+    width: 100%; /* Ensure items take full width on mobile */
+  }
+
+  .items_nav2 {
+    padding: 2vh; /* Increase padding for better touch experience */
+    display: block; /* Ensure full width for touch targets */
+    text-align: center; /* Center align text */
+  }
+
+  .nav {
+    flex-direction: column; /* Stack nav items vertically on mobile */
+    align-items: center; /* Center align nav items */
+  }
+}
