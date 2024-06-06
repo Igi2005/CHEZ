@@ -7,22 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model ekwipunek {
+<<<<<<< HEAD
   id_usera Int
   id_broni Int
   cena     Float  @db.Float
   users    users  @relation(fields: [id_usera], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_1")
   images   images @relation(fields: [id_broni], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_2")
+=======
+  id_usera    Int
+  id_broni    Int
+  id_operacji Int @id @default(autoincrement())
+>>>>>>> e4ebe1dba7187a990778804c9bb9d087800d83e1
 
-  @@id([id_usera, id_broni])
   @@index([id_broni], map: "id_broni")
+  @@ignore
 }
 
 model images {
-  id        Int         @id @default(autoincrement())
-  name      String?     @db.VarChar(255)
-  img       String?     @db.VarChar(255)
-  ekwipunek ekwipunek[]
+  id   Int     @id @default(autoincrement())
+  name String? @db.VarChar(255)
+  img  String? @db.VarChar(255)
+  cena Int?
 }
 
 model skrzynki {
@@ -41,6 +48,7 @@ model skrzynkibronie {
 }
 
 model users {
+<<<<<<< HEAD
   id        Int         @id @default(autoincrement())
   name      String      @db.VarChar(50)
   surname   String      @db.VarChar(50)
@@ -49,4 +57,13 @@ model users {
   balans    Int         @default(100)
   nick      String      @unique(map: "nick") @db.VarChar(50)
   ekwipunek ekwipunek[]
+=======
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(50)
+  surname  String @db.VarChar(50)
+  email    String @unique(map: "email") @db.VarChar(50)
+  password String @db.VarChar(50)
+  balans   Int    @default(100)
+  nick     String @unique(map: "nickname") @db.VarChar(50)
+>>>>>>> e4ebe1dba7187a990778804c9bb9d087800d83e1
 }
