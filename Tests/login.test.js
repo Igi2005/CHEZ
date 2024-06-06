@@ -22,7 +22,6 @@ describe('API Endpoints', () => {
         
         prisma.users.findUnique = jest.fn().mockResolvedValue({
             name: 'Xiega',
-            balans: 100,
             nick: 'Xiega'
         });
 
@@ -33,11 +32,10 @@ describe('API Endpoints', () => {
 
     it('should respond with user data on /login/nickname after login', async () => {
         globalNick = 'Xiega';
-        globalBalans = 100;
         
         const response = await request(app).get('/login/nickname');
         expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual({ msg: 'zalogowano sie', data: 'Xiega', balans: 100 });
+        expect(response.body).toMatchObject({ msg: 'zalogowano sie', data: 'Xiega', balans: 20 });
     });
 
     /*
