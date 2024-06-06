@@ -2,16 +2,35 @@ body {
     width: 100%;
     height: 100vh;
     background-image: linear-gradient(
-                    55deg,
-                    hsl(37deg 100% 36%) 0%,
-                    hsl(36deg 91% 33%) 13%,
-                    hsl(35deg 84% 30%) 29%,
-                    hsl(34deg 78% 27%) 48%,
-                    hsl(34deg 72% 23%) 68%,
-                    hsl(33deg 66% 19%) 84%,
-                    hsl(32deg 59% 16%) 92%,
-                    hsl(32deg 53% 12%) 97%,
-                    hsl(33deg 47% 8%) 99%,
-                    hsl(0deg 0% 2%) 100%
+      55deg,
+      hsl(37deg 100% 36%) 0%,
+      hsl(36deg 91% 33%) 13%,
+      hsl(35deg 84% 30%) 29%,
+      hsl(34deg 78% 27%) 48%,
+      hsl(34deg 72% 23%) 68%,
+      hsl(33deg 66% 19%) 84%,
+      hsl(32deg 59% 16%) 92%,
+      hsl(32deg 53% 12%) 97%,
+      hsl(33deg 47% 8%) 99%,
+      hsl(0deg 0% 2%) 100%
     );
-}
+  }
+  
+  /* Media Queries for mobile */
+  @media (max-width: 768px) {
+    body {
+      background-image: linear-gradient(
+        55deg,
+        hsl(37deg 100% 36%) 0%,
+        hsl(36deg 91% 33%) 10%,
+        hsl(35deg 84% 30%) 20%,
+        hsl(34deg 78% 27%) 40%,
+        hsl(34deg 72% 23%) 60%,
+        hsl(33deg 66% 19%) 80%,
+        hsl(32deg 59% 16%) 90%,
+        hsl(32deg 53% 12%) 95%,
+        hsl(33deg 47% 8%) 97%,
+        hsl(0deg 0% 2%) 100%
+      );
+    }
+  }

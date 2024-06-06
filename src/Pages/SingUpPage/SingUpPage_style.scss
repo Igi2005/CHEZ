@@ -1,4 +1,4 @@
-.form_signup{
+.form_signup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,12 +32,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-h1{
+h1 {
   text-align: center;
   margin-bottom: 10%;
 }
 
-.inputs{
+.inputs {
   position: relative;
   width: 100%;
   height: 5vh;
@@ -65,5 +65,43 @@ input::placeholder {
   margin-bottom: 4%;
   margin-top: 4%;
 }
+
+/* Media Queries for mobile */
+@media (max-width: 768px) {
+  .form_signup {
+      height: auto;
+      padding: 10px;
+  }
+
+  #form_signup {
+      width: 80%;
+      height: auto;
+      padding: 20px;
+      margin-top: 10px;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+      margin-bottom: 5%;
+  }
+
+  .inputs {
+      height: auto;
+      margin-bottom: 2%;
+      margin-top: 2%;
+  }
+
+  input {
+      padding: 1vh;
+  }
+
+  #login_btn {
+      height: auto;
+      padding: 10px;
+      margin-bottom: 2%;
+      margin-top: 2%;
+  }
+}
+
 
 

@@ -22,7 +22,9 @@ export function Main() {
     const [balans, setBalans] = useState([])
     const [guns2, setGuns2] = useState<Gun[]>([]);
     const navigate = useNavigate();
-    const [choice,setChoice] = useState(true)
+    const [choice,setChoice] = useState(false)
+    const [choice2, setChoice2] = useState(false)
+    const [choice3, setChoice3] = useState(false)
     
     useEffect(() => {
         axios.get('http://localhost:3000/')
@@ -75,6 +77,8 @@ export function Main() {
     }, [names.length]);
 
     function SortAsc() {
+        setChoice2(false)
+        setChoice(true)
         //console.log("data----------------- " + data);
         //console.log(data[1].cena);
         for (let i = 0; i < data.length - 1; i++) {
@@ -87,11 +91,12 @@ export function Main() {
             }
         }
         //console.log(data);
-        setChoice(true)
+        
     }
 
     function SortDesc() {
-        
+        setChoice2(false)
+        setChoice(true)
         for (let i = 0; i < data.length - 1; i++) {
             for (let j = 0; j < data.length - 1; j++) {
                 if (Number(data[j].cena) > Number(data[j + 1].cena)) {
@@ -101,11 +106,11 @@ export function Main() {
                 }
             }
         }
-        setChoice(true)
     }
     const help: Gun[] = [];
     function Avaible() {
-        
+        setChoice(false)
+        setChoice2(true)
         axios.get('http://localhost:3000/openbox')
         .then(res => {
             setBalans(res.data.balans)
@@ -124,11 +129,7 @@ export function Main() {
                 });
             } 
         }
-        //console.log(help)
         setGuns2(help);
-        //console.log(guns2)
-        setChoice(false)
-        
     }
 
     function OpenBox(index:number) {
@@ -184,36 +185,42 @@ export function Main() {
                     <button id="avaible" onClick={Avaible}>Dostępne do kupienia</button>
                     <hr />
                 </div>
-                {choice ? (
-                    data.length > 0 ? (
-                        <ul className="lootBoxContainer">
-                            {data.map(item => (
-                                <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
-                                    <img src={item.img} alt={item.nazwa} />
-                                    <p>{item.nazwa} | {item.cena}</p>
-                                </div>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Trwa ładowanie danych...</p>
-                    )
+                {choice ? ( data.length > 0 ? (
+                    <ul className="lootBoxContainer">
+                     {data.map(item => (
+                    <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                        <img src={item.img} alt={item.nazwa} />
+                        <p>{item.nazwa} | {item.cena}</p>
+                    </div>
+                        ))}
+                    </ul>
                 ) : (
-                    guns2.length > 0 ? (
-                        <ul className="lootBoxContainer">
-                            {guns2.map(item => (
-                                <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
-                                    <img src={item.img} alt={item.nazwa} />
-                                    <p>{item.nazwa} | {item.cena}</p>
+                    <p>Zaloguj się!</p>
+                )
+            ) : choice2 ? (
+                guns2.length > 0 ? (
+                    <ul className="lootBoxContainer">
+                        {guns2.map(item => (
+                            <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                                <img src={item.img} alt={item.nazwa} />
+                                <p>{item.nazwa} | {item.cena}</p>
                             </div>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Zaloguj sie!</p>
-                    )
-                )}
-
-        </div>
-
-        </div>
-    );
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Zaloguj sie!</p>
+                )
+            ) : (
+                <ul className="lootBoxContainer">
+                     {data.map(item => (
+                    <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                        <img src={item.img} alt={item.nazwa} />
+                        <p>{item.nazwa} | {item.cena}</p>
+                    </div>
+                        ))}
+                    </ul>
+            )}
+            </div>
+            </div>
+                );
 }
