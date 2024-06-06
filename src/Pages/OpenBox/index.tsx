@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate  } from "react-router-dom";
 import { Header } from "../../Components/Header";
 import { useEffect, useState,useRef  } from "react";
 import axios from "axios";
@@ -6,27 +6,50 @@ import { Footer } from "../../Components/Footer";
 import "./OpenBox_style.scss"
 import { BiColor } from "react-icons/bi";
 import backgroundImage from '../../assets/background.png'; 
-
+import audio1 from '../../assets/CS_GO Case + Knife Opening Sound Effect.mp3'
 export function OpenBox() {
         
     const location = useLocation();
     const { index } = location.state || { index: 0 };
-    const [skrzynka, setSkrzynka] = useState({});
-    const [bronie, setBronie] = useState([]);
-    const [test, setTest] = useState(null);
-    const [balans, setBalas] = useState<null | number>(null);
+    const [skrzynka, setSkrzynka] = useState<any>({});
+    const [bronie, setBronie] = useState<any[]>([]);
+    const [clearData, setClearData] = useState<any[]>([]);
+    const [test, setTest] = useState<any>(null);
+    const [balans, setBalas] = useState<number | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [animationActive, setAnimationActive] = useState(false);
-    const [act,setAct] = useState(false)
-    const specialElementRef = useRef(null);
-    const [win,setWin] = useState(null)
-
+    const [test2, setTest2] = useState(true);
+    const specialElementRef = useRef<HTMLDivElement | null>(null);
+    const [shuffledNames, setShuffledNames] = useState<string[]>([]);
+    const [shuffledNames2, setShuffledNames2] = useState<string[]>([]);
+    const [action, setAction] = useState(false)
+    const navigate = useNavigate();
+    
     useEffect(() => {
         axios.get(`http://localhost:3000/openbox/${index}`)
             .then(res => {
-                setSkrzynka(res.data.img)
-                setBronie(res.data.data)
+                setSkrzynka(res.data.img);
+                setBronie(res.data.data);
+                setClearData(res.data.data);
 
+                const names = [];
+                const names2 = [];
+                const bronie = res.data.data;
+
+                for (let i = 0; i < bronie.length; i++) {
+                    names.push(bronie[i].img);
+                    names2.push(bronie[i].name);
+                }
+
+                for (let i = names.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [names[i], names[j]] = [names[j], names[i]];
+                    [names2[i], names2[j]] = [names2[j], names2[i]];
+                }
+
+                setShuffledNames(names);
+                setShuffledNames2(names2);
+                
             })
             .catch(error => {
                 console.error('Błąd serwera: ', error.message); 
@@ -34,24 +57,44 @@ export function OpenBox() {
         
     }, []);
 
-    useEffect(() => {
-        const paragraphText = document.getElementById('special') as HTMLDivElement | null;
-        if (paragraphText) {
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = paragraphText.innerHTML;
-            const pElement = tempElement.querySelector('p');
-    
-            if (pElement) {
-                const textContent = pElement.textContent; 
-                //console.log("wylosowana bron to " + textContent);
-                setWin(textContent)
-                console.log("win to " + win)
-                //alert("you won " + win)
-                //window.location.reload();
+    useEffect(()=>{
+        //console.log("wywołanie useEFECT")
+        if(animationActive == false && test2 == false){
 
+            const p1 = document.querySelector('.special')?.querySelector('p')
+            console.log(p1?.outerHTML)         
+            let obj = null
+            for(let i = 0; i < clearData.length; i++) {
+                if(clearData[i].name == p1?.textContent) {
+                    obj = clearData[i]
+                    console.log("\t obj to " + obj.name)
+                }
             }
+            const Data = {
+                item: obj
+            }
+            
+            if(obj != null) {
+                axios.post('http://localhost:3000/adddata',Data)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.error('Błąd serwera: ', error.message);
+                });
+            }
+            setTest2(true)
+            setAction(true)
+            navigate('/user', { state: { action} });
         }
-    });
+    })
+
+    useEffect(() => {
+        if (action) {
+            navigate('/user', { state: { action } });
+        }
+    }, [test2, action, navigate]);
+
     
     axios.get('http://localhost:3000/openbox')
         .then(response => {
@@ -69,15 +112,7 @@ export function OpenBox() {
         .catch(error => {
             console.error('Błąd serwera: ', error.message);
         });
-    
-    let names = []
-    let names2 = []
-
-    for(let i = 0; i < bronie.length; i++) {
-        names.push(bronie[i].img)
-        names2.push(bronie[i].name)
-    }
-
+        
     const logoStyle = {
         color : 'red'
     };
@@ -88,10 +123,10 @@ export function OpenBox() {
 
     //console.log("balans to " + balans + "cena to "  + skrzynka.cena)
     function startAnimation(){
-        if(Number(balans) >= skrzynka.cena) {
+        if(Number(balans) >= skrzynka.cena && test2 == true) {
             const saldo:number = balans - skrzynka.cena;
             setBalas(saldo);
-            console.log("-------------->" + saldo)
+            //console.log("-------------->" + saldo)
             const Data = {
                 Balans : saldo
             }
@@ -107,29 +142,33 @@ export function OpenBox() {
             let currentInterval = 1; 
             let animationStartTime = Date.now();
             const animate = () => {
-                setCurrentIndex((prevIndex) => (prevIndex + 1) % names.length);
-                //console.log("interval to " + currentInterval);
-                console.log("new balans to " + saldo);
+
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledNames.length);
                 const elapsedTime = Date.now() - animationStartTime;
                 if (elapsedTime < 10000) { 
+                    //console.log("elapsed time to " + elapsedTime)
                     if(currentInterval < 100) {
                         currentInterval+=1;
                     }
                     if(currentInterval >= 100) {
                         currentInterval+=100;
                     }
-                    setTimeout(animate, currentInterval);
+                    setTimeout(animate, currentInterval);   
                 } 
-                if(elapsedTime === 10000) {
-                    setAnimationActive(false); 
+                if(elapsedTime >= 10000) {
+                    console.log("elapsed" + elapsedTime)
+                    
+                    console.log("elapsedTime == 10000")
+                    setAnimationActive(false);
+                    setTest2(false) 
                 }
             };
+            /*const audio = new Audio(audio1);
+            audio.play();*/
             animate();
         }
     }
     
-    
-
     return (
         <div>
             <Header/>
@@ -137,7 +176,7 @@ export function OpenBox() {
                 <div id="box">
                     <div className="data_box">
                     <p>Nazwa: {skrzynka.nazwa}</p>
-                    <p>Cena: {skrzynka.cena}</p>
+                    <p>Cena: {skrzynka.cena} Saldo po otwarciu to {balans - skrzynka.cena}</p>
                     <img src={skrzynka.img} alt={skrzynka.nazwa} />
                     <div>
                         {test === null || test === undefined ? (
@@ -150,20 +189,20 @@ export function OpenBox() {
                     </div>      
                 <div id="animation">
                 {Array.from({ length: 7 }).map((_, i) => {
-                            const index = (currentIndex + i) % names.length;
-                            //console.log("nazwa broni " + names2[index])
+                            const index = (currentIndex + i) % shuffledNames.length;
                             return (
-                                <div 
-                                    id={i === 3 ? "special" : "one_photo_box" } 
-                                    ref={specialElementRef}
+                                <div
+                                    className={i === 3 ? "special" : "one_photo_box"}
+                                    ref={i === 3 ? specialElementRef : null}
+                                    key={i}
                                 >
                                     <img
                                         className="header_photos"
-                                        src={names[index]}
+                                        src={shuffledNames[index]}
                                         alt={`Zdjęcie ${index + 1}`}
                                         style={{ width: '15vh', height: 'auto' }}
                                     />
-                                    <p>{names2[index]}</p>
+                                    <p className={i > 0 && i < 7 ? "specialText" : "puste"}>{shuffledNames2[index]}</p>
                                 </div>
                             );
                         })}

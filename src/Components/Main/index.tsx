@@ -73,9 +73,8 @@ export function Main() {
     }, [names.length]);
 
     function SortAsc() {
-        
-        console.log("data----------------- " + data);
-        console.log(data[1].cena);
+        //console.log("data----------------- " + data);
+        //console.log(data[1].cena);
         for (let i = 0; i < data.length - 1; i++) {
             for (let j = 0; j < data.length - 1; j++) {
                 if (Number(data[j].cena) < Number(data[j + 1].cena)) {
