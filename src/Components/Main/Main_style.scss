@@ -14,7 +14,6 @@ body, html {
 }
 
 #headerLoot {
-  
   height: 25%;
   width: 100%; 
   display: flex;
@@ -160,4 +159,45 @@ body, html {
   color: white;
   background: rgba(0, 0, 0, 0.5);
   padding: 10px;
+}
+
+/* Media Queries for mobile */
+@media (max-width: 768px) {
+  #headerLoot {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 2vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
+  #header_photos {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 2vh;
+    justify-content: center;
+  }
+
+  #headerLootRight {
+    width: 100%;
+    text-align: center;
+    margin-top: 2vh;
+    font-size: 1.5em;
+  }
+
+  .lootBox {
+    flex: 1 1 80%;
+    margin: 10px 0;
+  }
+
+  .randomCrateContainer {
+    height: auto;
+  }
+
+  .randomCrateImage {
+    width: 100%;
+    height: auto;
+  }
 }

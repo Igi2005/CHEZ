@@ -37,8 +37,9 @@ export function Main() {
             .catch(error => {
                 console.error('Błąd serwera: ', error.message);
             });
+
     }, []);
-    //console.log(data);
+    console.log(data);
 
     useEffect(() => {
         axios.get('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json')

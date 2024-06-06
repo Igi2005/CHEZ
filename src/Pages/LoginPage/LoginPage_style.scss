@@ -1,24 +1,21 @@
-.form_login{
+.form_login {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
-  /*background: url("../.././assets/tapeta.jpg")no-repeat;
-  background-size: cover;
-  background-position: center;*/
   background-image: linear-gradient(
-                  55deg,
-                  hsl(37deg 100% 36%) 0%,
-                  hsl(36deg 91% 33%) 13%,
-                  hsl(35deg 84% 30%) 29%,
-                  hsl(34deg 78% 27%) 48%,
-                  hsl(34deg 72% 23%) 68%,
-                  hsl(33deg 66% 19%) 84%,
-                  hsl(32deg 59% 16%) 92%,
-                  hsl(32deg 53% 12%) 97%,
-                  hsl(33deg 47% 8%) 99%,
-                  hsl(0deg 0% 2%) 100%
+    55deg,
+    hsl(37deg 100% 36%) 0%,
+    hsl(36deg 91% 33%) 13%,
+    hsl(35deg 84% 30%) 29%,
+    hsl(34deg 78% 27%) 48%,
+    hsl(34deg 72% 23%) 68%,
+    hsl(33deg 66% 19%) 84%,
+    hsl(32deg 59% 16%) 92%,
+    hsl(32deg 53% 12%) 97%,
+    hsl(33deg 47% 8%) 99%,
+    hsl(0deg 0% 2%) 100%
   );
 }
 
@@ -35,19 +32,18 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-h1{
+h1 {
   text-align: center;
   margin-bottom: 10%;
 }
 
-.inputs{
+.inputs {
   position: relative;
   width: 100%;
   height: 5vh;
   margin-bottom: 4%;
   margin-top: 4%;
   font-weight: bolder;
-
 }
 
 input {
@@ -76,17 +72,17 @@ input::placeholder {
   margin-bottom: 4%;
   margin-top: 4%;
   background-image: linear-gradient(
-                  55deg,
-                  hsl(37deg 100% 36%) 0%,
-                  hsl(36deg 91% 33%) 7%,
-                  hsl(35deg 84% 30%) 15%,
-                  hsl(34deg 78% 27%) 25%,
-                  hsl(34deg 72% 23%) 37%,
-                  hsl(33deg 66% 19%) 53%,
-                  hsl(32deg 59% 16%) 68%,
-                  hsl(32deg 53% 12%) 81%,
-                  hsl(33deg 47% 8%) 91%,
-                  hsl(0deg 0% 2%) 100%
+    55deg,
+    hsl(37deg 100% 36%) 0%,
+    hsl(36deg 91% 33%) 7%,
+    hsl(35deg 84% 30%) 15%,
+    hsl(34deg 78% 27%) 25%,
+    hsl(34deg 72% 23%) 37%,
+    hsl(33deg 66% 19%) 53%,
+    hsl(32deg 59% 16%) 68%,
+    hsl(32deg 53% 12%) 81%,
+    hsl(33deg 47% 8%) 91%,
+    hsl(0deg 0% 2%) 100%
   );
   font-size: 1rem;
   font-weight: bolder;
@@ -109,4 +105,34 @@ input::placeholder {
 
 #create_icon {
   font-size: 160%;
+}
+
+/* Media Queries for mobile */
+@media (max-width: 768px) {
+  #form_login {
+    width: 90%;
+    height: auto;
+    padding: 5vh 3vh;
+    margin-top: 0;
+  }
+
+  input {
+    height: 6vh;
+    padding: 1vh;
+    font-size: 1rem;
+  }
+
+  #login_btn {
+    height: 6vh;
+    padding: 2vh;
+    font-size: 1.2rem;
+  }
+
+  #create_acc {
+    font-size: 1.5rem;
+  }
+
+  #create_icon {
+    font-size: 2rem;
+  }
 }

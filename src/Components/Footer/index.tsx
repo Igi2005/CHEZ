@@ -6,6 +6,8 @@ import { RiVisaFill } from "react-icons/ri";
 import { MdOutlinePayment } from "react-icons/md";
 import { FaGooglePay } from "react-icons/fa";
 import { LiaPaypal } from "react-icons/lia";
+import React from "react";
+
 
 export function Footer() {
     return (
