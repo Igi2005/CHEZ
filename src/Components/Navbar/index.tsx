@@ -15,11 +15,11 @@ export function Navbar(){
     const { getCollapseProps, getToggleProps, isExpanded } = useCollapse(config);
 
     return (
-    <div className="collapsible">
-        <div className="nav" {...getToggleProps()}>
+    <div className="collapsible" >
+        <div className="nav" {...getToggleProps()} data-testid="navbar_toggle">
             {isExpanded ?  <IoCloseCircleOutline className="icons_nav"/>: <TiThMenuOutline className="icons_nav"/> }
         </div>
-        <div {...getCollapseProps()}>
+        <div {...getCollapseProps()} data-testid="navbarr">
             <div className="content_nav">
                 {routes.map((route) => (
                     <li key={route.path} className="items_nav">
