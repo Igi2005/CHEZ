@@ -10,6 +10,49 @@ let globalNick = null
 let globalBalans = null
 let globalId = null
 
+router.get('/getitems',async(req,res)=>{
+    if(globalId != null) {
+        console.log("globalId != null id to " + globalId)
+        const getUniqueData = await prisma.ekwipunek.findMany({
+            where:{
+                id_usera : globalId
+            }  
+        })
+        const userData = await prisma.users.findUnique({
+            where :{
+                id : globalId
+            }
+        })
+        const weaponsData = [];
+        for (const userWeapon of getUniqueData) {
+          const weaponData = await prisma.images.findUnique({
+            where: {
+              id: userWeapon.id_broni,
+            },
+          });
+          weaponsData.push(weaponData);
+        }
+        console.log('Dane użytkownika:', getUniqueData);
+        console.log('Dane broni:', weaponsData);
+        res.json({data : weaponsData, id : globalId, userData : userData})
+    }
+})
+
+router.get('/getaddeddata/:action',async(req,res) =>{
+    const gunName = req.params.action
+    console.log("gunName to " + gunName)
+    const getUniqueData = await prisma.images.findFirst({
+        where : {
+            name : gunName
+        }
+    })
+    console.log("--------------------------------")
+    console.log(getUniqueData)
+    console.log("--------------------------------")
+    res.json({data : getUniqueData})
+})
+
+
 router.get('/openbox',async(req,res) => {
     //console.log("openbox")
     res.json({data : globalNick, balans : globalBalans})
