@@ -2,6 +2,8 @@ import "./Main_style.scss";
 import { SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+
 
 interface Gun {
     id_skrzynki: number;
