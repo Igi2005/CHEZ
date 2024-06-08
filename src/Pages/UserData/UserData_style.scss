@@ -1,0 +1,69 @@
+#mainUser {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid black;
+  margin-top: 5vh;
+  background: rgb(194,91,24);
+  background: radial-gradient(circle, rgba(194,91,24,1) 0%, rgba(57,49,49,1) 100%);
+}
+
+.user-container {
+  padding: 40vh;
+  font-family: Arial, sans-serif;
+}
+
+.user-card {
+  border: 5px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.user-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.user-card h2 {
+  color: #333;
+}
+
+.user-card p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.weapon-data-list {
+  width: 100%;
+  height: auto;
+  list-style-type: none;
+  padding: 0;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+}
+.weapon-data-list li {
+  margin-left: 50vh;
+  width: 25%;
+  height: auto;
+  border-radius: 5px;
+  img {
+    width: 20vh;
+    height: 20vh;
+  }
+}
+
+.one-item {
+  display: flex;
+  align-items: center;
+  font-size: larger;
+}

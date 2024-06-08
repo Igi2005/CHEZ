@@ -83,15 +83,19 @@ export function OpenBox() {
                     console.error('Błąd serwera: ', error.message);
                 });
             }
+            const send = p1?.textContent
+            console.log("send to " + send)
             setTest2(true)
             setAction(true)
-            navigate('/user', { state: { action} });
+            
         }
-    })
+    }, [animationActive, test2, clearData, navigate])
 
     useEffect(() => {
         if (action) {
-            navigate('/user', { state: { action } });
+            const p1 = document.querySelector('.special')?.querySelector('p')
+            const send = p1?.textContent
+            navigate('/user', { state: {send} });
         }
     }, [test2, action, navigate]);
 
