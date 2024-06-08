@@ -1,91 +1,38 @@
-.collapsible {
-  position: relative; /* Ustaw relatywną pozycję, aby elementy potomne mogły być absolutnie pozycjonowane w odniesieniu do tego kontenera */
-}
-
-.collapsible .content {
-  display: none; /* Domyślnie ukryj zawartość menu rozwijanego */
-  position: absolute; /* Ustaw absolutną pozycję, aby menu rozwijane było poza normalnym przepływem dokumentu */
-  top: 100%; /* Umieść menu rozwijane pod nagłówkiem */
-  left: 0;
-  width: 100%;
-  z-index: 1; /* Ustaw wyższy indeks, aby menu było na wierzchu */
-  background-color: rgba(255, 105, 180, 0.9); /* Kolor tła z przeźroczystością */
-}
-
-.collapsible.active .content {
-  display: flex; /* Po kliknięciu pokaż zawartość menu rozwijanego */
-  flex-direction: column; /* Ustawiony na kolumnę, aby elementy były ułożone jeden pod drugim */
-}
-
-.collapsible .header {
-  cursor: pointer;
-  background-color: #dddddd;
+#btnNav {
+  background-color: inherit;
+  height: 10vh;
+  width: 10vh;
+  border: 0px;
+  color: black;
+  margin: 2vh;
 }
 
 .icons_nav {
-  font-size: 4.2rem;
-  text-align: right;
-}
-
-.content_nav {
-  font-size: 150%;
-  font-weight: bold;
-  border: 2px solid black;
+  width: 9vh;
+  height: 9vh;
 }
 
 .items_nav {
-  margin: 3vh;
-  border: 1px solid black;
-}
-
-.items_nav2 {
-  text-decoration: none;
   color: black;
-  padding: 1vh;
-  width: 100%;
-  height: 100%;
 }
 
-.items_nav:hover {
-  background-color: grey;
-  border: 1px solid lightblue;
-}
-
-.nav {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Media Queries for mobile */
-@media (max-width: 768px) {
-  .collapsible .content {
-    position: static; /* Ensure dropdown content stays within normal document flow */
-    width: 100%;
-    background-color: rgba(255, 105, 180, 0.9); /* Ensure background color for dropdown */
+.navbar {
+  a:visited {
+    color: black;
   }
-
-  .icons_nav {
-    font-size: 3rem; /* Adjust icon size for mobile */
-    text-align: center; /* Center align icons */
+  .dropdown-menu {
+    background-color: inherit;
+    border: 2px solid black;
+    height: auto;
   }
-
-  .content_nav {
-    font-size: 120%; /* Adjust font size for mobile */
+  .dropdown-item {
+    background-color: inherit;
+    font-size: 150%;
+    font-weight: bolder;
+    margin-top: 3vh;
+    border: 1px solid black;
   }
-
-  .items_nav {
-    margin: 2vh 0; /* Reduce margin for mobile */
-    width: 100%; /* Ensure items take full width on mobile */
-  }
-
-  .items_nav2 {
-    padding: 2vh; /* Increase padding for better touch experience */
-    display: block; /* Ensure full width for touch targets */
-    text-align: center; /* Center align text */
-  }
-
-  .nav {
-    flex-direction: column; /* Stack nav items vertically on mobile */
-    align-items: center; /* Center align nav items */
+  .dropdown-toggle::after {
+    display: none;
   }
 }
