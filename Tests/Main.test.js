@@ -5,17 +5,18 @@ import { MemoryRouter } from "react-router-dom";
 import { Main } from "../src/Components/Main";
 import { describe, test, expect, beforeEach } from '@jest/globals';
 import React from "react";
-import request from "supertest";
 
 
 const axiosMock = new axiosMockAdapter(axios);
 
 describe("Main Component", () => {
     beforeEach(() => {
-        axiosMock.reset();
+        //axiosMock.reset();
         waitFor(() => {
-            request(app).post('/login')
-            .send({ UserEmail: 'xiega@wp.pl', UserPass: 'qwerty' })
+            axios.post('/login', {
+                firstName: 'xiega@wp.pl',
+                lastName: 'qwerty'
+              })
         });
     });
 
