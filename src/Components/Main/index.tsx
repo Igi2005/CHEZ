@@ -48,7 +48,7 @@ export function Main() {
             .then(res => {
                 setRecords(res.data);
                 setIsDataLoaded(true);
-                //console.log(records)
+                //console.log(records)  
             })
             .catch(err => console.log(err));
     }, []);
@@ -60,6 +60,7 @@ export function Main() {
             for (let i = 0; i < 40; i++) {
                 const randomIndex = Math.floor(Math.random() * records.length);
                 const record = records[randomIndex];
+                console.log(record);
                 namesArray.push(record['image']);
                 namesGun.push(record['name']);
             }
@@ -91,7 +92,6 @@ export function Main() {
             }
         }
         //console.log(data);
-        
     }
 
     function SortDesc() {
@@ -188,7 +188,7 @@ export function Main() {
                 {choice ? ( data.length > 0 ? (
                     <ul className="lootBoxContainer">
                      {data.map(item => (
-                    <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                    <div className="lootBox" role='listitem' id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
                         <img src={item.img} alt={item.nazwa} />
                         <p>{item.nazwa} | {item.cena}</p>
                     </div>

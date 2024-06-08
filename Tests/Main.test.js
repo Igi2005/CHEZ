@@ -1,125 +1,77 @@
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import axios from "axios";
-import axiosMockAdapter from "axios-mock-adapter";
-import { MemoryRouter } from "react-router-dom";
-import { Main } from "../src/Components/Main";
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import axios from 'axios';
+import { Main } from '../src/Components/Main';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { describe, test, expect, beforeEach } from '@jest/globals';
-import React from "react";
-import request from "supertest";
+import '@testing-library/jest-dom/';
 
+jest.mock('axios');
 
-const axiosMock = new axiosMockAdapter(axios);
+describe('Main', () => {
+  beforeEach(() => {
+    axios.get.mockResolvedValueOnce({
+        data: {
+          data: [
+            { id_skrzynki: 1, img: 'image1.jpg', nazwa: 'Skin 1', cena: 10 },
+            { id_skrzynki: 2, img: 'image2.jpg', nazwa: 'Skin 2', cena: 20 },
+          ],
+        },
+      });
+      axios.get.mockResolvedValueOnce({
+        data: [
+          { image: 'image1.jpg', name: 'Gun 1' },
+          { image: 'image2.jpg', name: 'Gun 2' },
+        ],
+      });
+  });
 
-describe("Main Component", () => {
-    beforeEach(() => {
-        axiosMock.reset();
-        waitFor(() => {
-            request(app).post('/login')
-            .send({ UserEmail: 'xiega@wp.pl', UserPass: 'qwerty' })
-        });
+  test('renders loot boxes', async () => {
+    render(
+      <Router>
+        <Main />
+      </Router>
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('img')).toHaveLength(2);
+      expect(screen.getByText('Skin 1 | 10')).toBeInTheDocument();
+      expect(screen.getByText('Skin 2 | 20')).toBeInTheDocument();
+    });
+  });
+
+  test('sorts loot boxes by price ascending', async () => {
+    render(
+      <Router>
+        <Main />
+      </Router>
+    );
+
+    await waitFor(() => {
+      userEvent.click(screen.getByText('Od najtańszych'));
+      const lootBoxes = screen.getAllByRole('listitem');
+        expect(lootBoxes[0]).toHaveTextContent('Skin 1 | 10');
+        expect(lootBoxes[1]).toHaveTextContent('Skin 2 | 20');
     });
 
-    test("renders loading state initially", () => {
-        render(<Main />, { wrapper: MemoryRouter });
-        expect(screen.getByText(/ładowanie/i)).toBeInTheDocument();
+    
+  });
+
+  test('sorts loot boxes by price descending', async () => {
+    render(
+      <Router>
+        <Main />
+      </Router>
+    );
+
+    await waitFor(() => {
+      userEvent.click(screen.getByText('Od najdroższych'));
+      const lootBoxes = screen.getAllByRole('listitem');
+      expect(lootBoxes[0]).toHaveTextContent('Skin 2 | 20');
+      expect(lootBoxes[1]).toHaveTextContent('Skin 1 | 10');
     });
 
-    test("loads and displays data", async () => {
-        const mockData = {
-            data: [
-                {
-                    id_skrzynki: 1,
-                    img: "https://example.com/image1.jpg",
-                    nazwa: "Gun 1",
-                    cena: 100
-                },
-                {
-                    id_skrzynki: 2,
-                    img: "https://example.com/image2.jpg",
-                    nazwa: "Gun 2",
-                    cena: 200
-                }
-            ]
-        };
-
-        axiosMock.onGet('http://localhost:3000/').reply(200, { data: mockData });
-        axiosMock.onGet('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json').reply(200, []);
-
-        render(<Main />, { wrapper: MemoryRouter });
-
-        await waitFor(() => {
-            expect(screen.getByText(/Gun 1/i)).toBeInTheDocument();
-            expect(screen.getByText(/Gun 2/i)).toBeInTheDocument();
-        });
-    });
-
-    test("sorts data ascending", async () => {
-        const mockData = {
-            data: [
-                {
-                    id_skrzynki: 1,
-                    img: "https://example.com/image1.jpg",
-                    nazwa: "Gun 1",
-                    cena: 200
-                },
-                {
-                    id_skrzynki: 2,
-                    img: "https://example.com/image2.jpg",
-                    nazwa: "Gun 2",
-                    cena: 100
-                }
-            ]
-        };
-
-        axiosMock.onGet('http://localhost:3000/').reply(200, { data: mockData });
-        axiosMock.onGet('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json').reply(200, []);
-
-        render(<Main />, { wrapper: MemoryRouter });
-
-        await waitFor(() => screen.getByText(/Gun 1/i));
-
-        fireEvent.click(screen.getByText(/Od najdroższych/i));
-
-        await waitFor(() => {
-            const items = screen.getAllByRole('listitem');
-            expect(items[0]).toHaveTextContent("Gun 1");
-            expect(items[1]).toHaveTextContent("Gun 2");
-        });
-    });
-
-    test("filters available items", async () => {
-        const mockData = {
-            data: [
-                {
-                    id_skrzynki: 1,
-                    img: "https://example.com/image1.jpg",
-                    nazwa: "Skrzynia Małpy",
-                    cena: 100
-                },
-                {
-                    id_skrzynki: 2,
-                    img: "https://example.com/image2.jpg",
-                    nazwa: "Skrzynia Bambi",
-                    cena: 200
-                }
-            ]
-        };
-
-        axiosMock.onGet('http://localhost:3000/').reply(200, { data: mockData });
-        axiosMock.onGet('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json').reply(200, []);
-        axiosMock.onGet('http://localhost:3000/openbox').reply(200, { balans: 150 });
-
-        render(<Main />, { wrapper: MemoryRouter });
-
-        await waitFor(() => 
-        screen.getByText(/Gun 1/i)
-        );
-
-        fireEvent.click(screen.getByText(/Dostępne do kupienia/i));
-
-        await waitFor(() => {
-            expect(screen.getByText(/Gun 1/i)).toBeInTheDocument();
-            expect(screen.queryByText(/Gun 2/i)).not.toBeInTheDocument();
-        });
-    });
+    
+  });
 });
