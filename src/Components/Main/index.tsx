@@ -48,7 +48,7 @@ export function Main() {
             .then(res => {
                 setRecords(res.data);
                 setIsDataLoaded(true);
-                //console.log(records)
+                //console.log(records)  
             })
             .catch(err => console.log(err));
     }, []);
@@ -91,7 +91,6 @@ export function Main() {
             }
         }
         //console.log(data);
-        
     }
 
     function SortDesc() {

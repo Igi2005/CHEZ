@@ -5,6 +5,8 @@ import {Link, useNavigate } from "react-router-dom";
 import {BiSolidUserPlus} from "react-icons/bi";
 import axios from "axios"
 import { useEffect, useState } from "react";
+import React from "react";
+
 
 export function Header() {
     const [nickName, setNickName] = useState(null);
@@ -49,7 +51,7 @@ export function Header() {
             </div>
             <div id="right">
             {nickName ? (
-                    <div className="nickname">
+                    <div className="nickname" data-testid="nickname">
                         Zalogowano: {nickName}<br/>
                         Balans: {balans}
                         <button onClick={LogOut}>Wyloguj sie!</button>
