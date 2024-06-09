@@ -22,9 +22,8 @@ export function Main() {
     const [balans, setBalans] = useState([])
     const [guns2, setGuns2] = useState<Gun[]>([]);
     const navigate = useNavigate();
-    const [choice,setChoice] = useState(false)
+    const [choice,setChoice] = useState(true)
     const [choice2, setChoice2] = useState(false)
-    const [choice3, setChoice3] = useState(false)
     
     useEffect(() => {
         axios.get('http://localhost:3000/')
@@ -108,16 +107,16 @@ export function Main() {
         }
     }
     const help: Gun[] = [];
-    function Avaible() {
-        setChoice(false)
-        setChoice2(true)
+    useEffect(()=>{
         axios.get('http://localhost:3000/openbox')
         .then(res => {
             setBalans(res.data.balans)
             console.log(balans)
         })
         .catch(err => console.log(err));
-        //const help: Gun[] = [];
+    },[])
+
+    function Avaible() {
         for(let i = 0; i < data.length;i++) {
             console.log(data[i].cena)
             if(Number(balans) >= Number(data[i].cena)) {
@@ -130,6 +129,8 @@ export function Main() {
             } 
         }
         setGuns2(help);
+        setChoice(false)
+        setChoice2(true)
     }
 
     function OpenBox(index:number) {
@@ -171,7 +172,6 @@ export function Main() {
                                 className="randomCrateImage"
                             />
                             <div className="overlayText">
-                                {/* Ten skin może być twój */}
                                 Ten skin może być twój
                             </div>
                         </div>
@@ -185,42 +185,48 @@ export function Main() {
                     <button id="avaible" onClick={Avaible}>Dostępne do kupienia</button>
                     <hr />
                 </div>
-                {choice ? ( data.length > 0 ? (
-                    <ul className="lootBoxContainer">
-                     {data.map(item => (
-                    <div className="lootBox" role='listitem' id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
-                        <img src={item.img} alt={item.nazwa} />
-                        <p>{item.nazwa} | {item.cena}</p>
-                    </div>
-                        ))}
-                    </ul>
+                {choice ? (
+                    data.length > 0 ? (
+                        <ul className="lootBoxContainer">
+                            {data.map(item => (
+                                <div className="lootBox" role="listitem" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                                    <img src={item.img} alt={item.nazwa} />
+                                    <p>{item.nazwa} | {item.cena}</p>
+                                </div>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="err_main">Zaloguj się!</p>
+                    )
+                ) : choice2 ? (
+                    balans !== null ? (
+                        guns2.length > 0 ? (
+                            <ul className="lootBoxContainer">
+                                {guns2.map(item => (
+                                    <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                                        <img src={item.img} alt={item.nazwa} />
+                                        <p>{item.nazwa} | {item.cena}</p>
+                                    </div>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="err_main">Masz za mało kaski</p>
+                        )
+                    ) : (
+                        <p className="err_main">Zaloguj sie !</p>
+                    )
                 ) : (
-                    <p>Zaloguj się!</p>
-                )
-            ) : choice2 ? (
-                guns2.length > 0 ? (
                     <ul className="lootBoxContainer">
-                        {guns2.map(item => (
+                        {data.map(item => (
                             <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
                                 <img src={item.img} alt={item.nazwa} />
                                 <p>{item.nazwa} | {item.cena}</p>
                             </div>
                         ))}
                     </ul>
-                ) : (
-                    <p>Zaloguj sie!</p>
-                )
-            ) : (
-                <ul className="lootBoxContainer">
-                     {data.map(item => (
-                    <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
-                        <img src={item.img} alt={item.nazwa} />
-                        <p>{item.nazwa} | {item.cena}</p>
-                    </div>
-                        ))}
-                    </ul>
-            )}
-            </div>
-            </div>
-                );
+                )}
+
+                </div>
+                </div>
+                        );
 }
