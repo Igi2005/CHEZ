@@ -10,6 +10,33 @@ let globalNick = null
 let globalBalans = null
 let globalId = null
 
+router.post('/sellitems',async(req,res)=>{
+    const data = req.body
+    const gunID = data.idG
+    const transactionID = data.idT
+    const money = data.price
+    const sell = await prisma.ekwipunek.delete({
+        where : {
+            id_broni: gunID,
+            id_operacji: transactionID,
+        }
+    })
+    const updateBalance = await prisma.users.update({
+        where : {
+            id: globalId
+        },
+        data: {
+            balans: {
+                increment: money 
+            }
+        }
+    })
+    globalBalans = globalBalans + money
+    if(sell) console.log("usuneło niby")
+    else console.log("nie usuneło")
+    
+})
+
 router.get('/getitems',async(req,res)=>{
     if(globalId != null) {
         console.log("globalId != null id to " + globalId)
@@ -18,6 +45,7 @@ router.get('/getitems',async(req,res)=>{
                 id_usera : globalId
             }  
         })
+        //console.log(getUniqueData)
         const userData = await prisma.users.findUnique({
             where :{
                 id : globalId
@@ -30,10 +58,11 @@ router.get('/getitems',async(req,res)=>{
               id: userWeapon.id_broni,
             },
           });
-          weaponsData.push(weaponData);
+          if (weaponData) {
+            weaponsData.push({ ...weaponData, id_operacji: userWeapon.id_operacji });
+          }
         }
-        console.log('Dane użytkownika:', getUniqueData);
-        console.log('Dane broni:', weaponsData);
+        //console.log('Dane broni:', weaponsData);
         res.json({data : weaponsData, id : globalId, userData : userData})
     }
 })
@@ -118,6 +147,7 @@ router.get('/login/nickname',async(req,res)=>{
 router.get('/login/logout',async(req,res)=>{
     globalNick = null
     globalBalans = null
+    globalId = null
     console.log("mamy req wylogowanie sie "  + globalNick)
 })
 
