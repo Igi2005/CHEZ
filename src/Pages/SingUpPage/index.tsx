@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { IoPerson } from "react-icons/io5";
+import React from "react";
 
 function SignUp() {
 
@@ -61,7 +62,7 @@ function SignUp() {
 
     return (
         <div className="form_signup">
-            <form action="/login" onSubmit={Validation} id="form_signup">
+            <form action="/login" onSubmit={Validation} id="form_signup" role='form'>
                 <h1>Stwórz konto!</h1>
                 <div className="inputs">
                     <input type="text" placeholder="Imie" name="user_name"/>
