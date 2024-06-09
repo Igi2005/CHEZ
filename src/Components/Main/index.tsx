@@ -139,7 +139,7 @@ export function Main() {
     const randomCrateImage = names.length > 0 ? names[Math.floor(Math.random() * names.length)] : '';
 
     return (
-        <div id="Loot">
+        <div id="Loot" data-testid='main'>
             <div id="headerLoot">
                 {names.length > 0 ? (
                     <div id="header_photos">

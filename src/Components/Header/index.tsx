@@ -44,7 +44,7 @@ export function Header() {
     }
 
     return (
-        <div className="header">
+        <div className="header" data-testid="header">
             <div id="left">
                 <a href="/"><img src={logo} id="logo_photo" alt="logo"/></a>
                 <h1 id="app_name">Małpie skrzynie</h1>
