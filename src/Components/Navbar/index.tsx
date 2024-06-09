@@ -1,33 +1,44 @@
-import React from 'react';
-import {routes} from "../../Routing/index.tsx"
-import {Link} from "react-router-dom"
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { IoCloseCircleOutline } from 'react-icons/io5';
+import { TiThMenuOutline } from 'react-icons/ti';
+import { useCollapse } from 'react-collapsed';
+import { routes } from '../../Routing';
 import "./Navbar_style.scss"
-import {TiThMenuOutline} from "react-icons/ti";
-import { IoCloseCircleOutline } from "react-icons/io5";
-import {useCollapse} from "react-collapsed";
-import {CiLogin} from "react-icons/ci";
-export function Navbar(){
+import Dropdown from 'react-bootstrap/Dropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+export function Navbar() {
 
-    const config = {
-        duration: 1000
-    };
+  const [stan,setStan ] = useState(false)
+  const [count,setCount] = useState(1)
+  function Swap() {
+    setCount(count + 1)
+    if(count % 2 == 0) {
+        setStan(true)
+    }
+    else {
+        setStan(false)
+    }
+  }
+  return (
+    <div className="navbar">
+      <Dropdown onClick={Swap}>
+        <Dropdown.Toggle /*variant="success"*/ id="btnNav" >
+            {stan ?  <IoCloseCircleOutline className="icons_nav"/>: <TiThMenuOutline className="icons_nav"/> }
+        </Dropdown.Toggle>
 
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse(config);
-
-    return (
-    <div className="collapsible" >
-        <div className="nav" {...getToggleProps()} data-testid="navbar_toggle">
-            {isExpanded ?  <IoCloseCircleOutline className="icons_nav"/>: <TiThMenuOutline className="icons_nav"/> }
-        </div>
-        <div {...getCollapseProps()} data-testid="navbarr">
-            <div className="content_nav">
-                {routes.map((route) => (
-                    <li key={route.path} className="items_nav">
-                        <Link to={route.path} className="items_nav2">{route.title}{route.icon}</Link>
-                    </li>
+        <Dropdown.Menu className='nav_menu'>
+            {routes
+            .filter(route => route.path !== '/openbox')
+            .map((route) => (
+                <Dropdown.Item href={route.path} className="items_nav">{route.title}{route.icon}</Dropdown.Item>
                 ))}
-            </div>
-        </div>
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
-    )
+
+
+  );
 }
+
+//  
