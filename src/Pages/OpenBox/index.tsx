@@ -7,6 +7,9 @@ import "./OpenBox_style.scss"
 import { BiColor } from "react-icons/bi";
 import backgroundImage from '../../assets/background.png'; 
 import audio1 from '../../assets/CS_GO Case + Knife Opening Sound Effect.mp3'
+import React from "react"
+
+
 export function OpenBox() {
         
     const location = useLocation();
@@ -179,9 +182,9 @@ export function OpenBox() {
             <div id="openBox" style={backgroundStyle}>
                 <div id="box">
                     <div className="data_box">
-                    <p>Nazwa: {skrzynka.nazwa}</p>
-                    <p>Cena: {skrzynka.cena} Saldo po otwarciu to {balans - skrzynka.cena}</p>
-                    <img src={skrzynka.img} alt={skrzynka.nazwa} />
+                    <p role="nazwa">Nazwa: {skrzynka.nazwa}</p>
+                    <p role='cena'>Cena: {skrzynka.cena} Saldo po otwarciu to {balans - skrzynka.cena}</p>
+                    <img role='img' src={skrzynka.img} alt={skrzynka.nazwa} />
                     <div>
                         {test === null || test === undefined ? (
                             <p style={logoStyle}>Zaloguj sie żeby otworzyć tą skrzynkę !</p>
