@@ -14,9 +14,8 @@ Nasza aplikacja korzysta z MySql, ale Prisma umożliwia również łatwą integr
 # Migrations: 
 Dzięki Prisma Migrate, zarządzanie migracjami bazy danych jest proste i bezpieczne, co ułatwia wprowadzanie zmian w schemacie danych.
 
----------------------------------|
-Jak programista naprawia żarówkę?|
-Używa debuggera!                 |
----------------------------------|
+
+Jak programista naprawia żarówkę? Używa debuggera!                 
+
 
 ![Ja po przeczytaniu tego żartu](https://github.com/Igi2005/CHEZ/blob/Front/src/assets/memix2.jpg?raw=true)
