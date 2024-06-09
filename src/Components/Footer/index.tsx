@@ -11,7 +11,7 @@ import React from "react";
 
 export function Footer() {
     return (
-        <div className="footer">
+        <div className="footer" data-testid='footer'>
             <div className="footerLeft">
             <div className="customerService"> 
                     <p>CUSTOMER SERVICE</p>

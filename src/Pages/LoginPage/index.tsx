@@ -7,6 +7,9 @@ import axios from "axios"
 import {Link} from "react-router-dom";
 import { BiSolidUserPlus } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
+import React from "react";
+
+
 function LoginPage(){
 
     /*const [Useremail, setUseremail] = useState('')
@@ -17,7 +20,9 @@ function LoginPage(){
     const navigate = useNavigate();
     function Validation(e : React.ChangeEvent<any>){
         e.preventDefault()
-        const {user_email,user_pass} = e.target.elements
+        //console.log(e.currentTarget.elements)
+        const {user_email,user_pass} = e.currentTarget.elements
+        //const {user_email, user_pass} = e.target.elements
         const email = user_email.value
         const pass = user_pass.value
 
@@ -56,17 +61,17 @@ function LoginPage(){
             <form action="/login" onSubmit={Validation} id="form_login">
                 <h1>Zaloguj się!</h1>
                 <div className="inputs">
-                    <input type="text" placeholder="Email" name="user_email" />
+                    <input type="text" data-testid='email' placeholder="Email" name="user_email" />
                     <FaUser className="icons"/>
                 </div>
                 {IsUseremail && <Error message="Podano niepoprawny adres email"></Error>}
                 <div className="inputs">
-                    <input type="password" placeholder="Podaj hasło" name="user_pass" />
+                    <input type="password" data-testid='passs' placeholder="Podaj hasło" name="user_pass" />
                     <RiLockPasswordFill className="icons"/>
                 </div>
                 {IsPassword && <Error message="Podano złe haslo!"></Error>}
-                <input type="submit" value="Zaloguj sie" id="login_btn"/>
-                <div className="create_acc">
+                <input type="submit" value="Zaloguj sie" data-testid="zaloguj" id="login_btn"/>
+                <div className="create_acc" data-testid='reg'>
                     <Link to="/signup" id="create_acc">Stwórz konto!<BiSolidUserPlus id="create_icon" /></Link>
                 </div>
                 {Err && <Error message="Podane dane nie zgadzają się!"></Error>}

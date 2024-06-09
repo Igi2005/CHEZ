@@ -6,5 +6,5 @@ interface ErrMsg {
 
 export function Error({message} : ErrMsg) {
 
-    return createElement('p', {style :{color : "red"}},message)
+    return createElement('p', {style :{color : "red"}, "data-testid":"error", "role": "error"},message)
 }
