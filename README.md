@@ -18,4 +18,5 @@ Dzięki Prisma Migrate, zarządzanie migracjami bazy danych jest proste i bezpie
 Jak programista naprawia żarówkę?|
 Używa debuggera!                 |
 ---------------------------------|
+
 ![Ja po przeczytaniu tego żartu](https://github.com/Igi2005/CHEZ/blob/Front/src/assets/memix2.jpg?raw=true)
