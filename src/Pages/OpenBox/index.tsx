@@ -149,7 +149,7 @@ export function OpenBox() {
 
                 setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledNames.length);
                 const elapsedTime = Date.now() - animationStartTime;
-                if (elapsedTime < 10000) { 
+                if (elapsedTime < 8000) { 
                     //console.log("elapsed time to " + elapsedTime)
                     if(currentInterval < 100) {
                         currentInterval+=1;
@@ -159,7 +159,7 @@ export function OpenBox() {
                     }
                     setTimeout(animate, currentInterval);   
                 } 
-                if(elapsedTime >= 10000) {
+                if(elapsedTime >= 8000) {
                     console.log("elapsed" + elapsedTime)
                     
                     console.log("elapsedTime == 10000")
@@ -167,8 +167,8 @@ export function OpenBox() {
                     setTest2(false) 
                 }
             };
-            /*const audio = new Audio(audio1);
-            audio.play();*/
+            const audio = new Audio(audio1);
+            audio.play();
             animate();
         }
     }
@@ -185,10 +185,11 @@ export function OpenBox() {
                     <div>
                         {test === null || test === undefined ? (
                             <p style={logoStyle}>Zaloguj sie żeby otworzyć tą skrzynkę !</p>
-                            ) : (
+                            ) : (balans > skrzynka.cena ? (
                             <button onClick={startAnimation} id="btn_open">Otwórz</button>
+                            ):(<p style={logoStyle}>Nie masz siana stary/stara !</p>)
+                            
                         )}
-                        {balans < skrzynka.cena && <p style={logoStyle}>Nie masz siana stary/stara !</p>}
                     </div>
                     </div>      
                 <div id="animation">

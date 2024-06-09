@@ -201,3 +201,12 @@ body, html {
     height: auto;
   }
 }
+
+.err_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  font-size: 250%;
+  font-weight: bolder;
+}
