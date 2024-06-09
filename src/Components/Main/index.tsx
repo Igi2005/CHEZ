@@ -196,7 +196,7 @@ export function Main() {
                             ))}
                         </ul>
                     ) : (
-                        <p className="err_main">Zaloguj się! ch</p>
+                        <p className="err_main">Zaloguj się!</p>
                     )
                 ) : choice2 ? (
                     balans !== null ? (

@@ -68,7 +68,7 @@ export default function UserData() {
             <div id="mainUser">
                 {action != null && action != undefined && id != null ? (
                     <div className="user-card pulse-effect">
-                        <p>Gratulacje wygrałes !</p>
+                        <p id="won">Gratulacje wygrałes !</p>
                         <h2>{data.name}</h2>
                         <img src={data.img} alt={data.name} />
                         <p>Cena: {data.cena} PLN</p>

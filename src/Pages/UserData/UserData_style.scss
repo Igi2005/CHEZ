@@ -16,6 +16,11 @@
   font-family: Arial, sans-serif;
 }
 
+#won{
+  font-size: 200%;
+  color: black;
+}
+
 .user-card {
   border: 5px solid black;
   padding: 20px;
@@ -120,5 +125,75 @@
   img {
     border-radius: 20px;
     margin: 2vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .weapon-data-list {
+    width: 100%;
+    height: auto;
+    list-style-type: none;
+    padding: 0;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .weapon-data-list li {
+    //margin-left: 50vh;
+    margin-bottom: 1vh;
+    width: 70%;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    img {
+      width: 18vh;
+      height: 18vh;
+    }
+    p {
+      display: flex;
+      flex-direction: column;
+      font-weight: bolder;
+    }
+    button {
+      width: auto;
+      background-color: rgba(252, 174, 89, 1);
+      background-image: radial-gradient(circle, rgba(252, 174, 89, 1) 25%, rgba(41, 53, 86, 1) 100%);
+      font-weight: bolder;
+    }
+    button:hover {
+      background-color: rgba(41, 53, 86, 1);
+      background-image: radial-gradient(circle, rgba(41, 53, 86, 1) 0%, rgba(252, 174, 89, 1) 96%);
+      border: 2px solid black;
+    }
+  }
+  .weapon-data-list li:hover{
+    border: 1px solid lightblue;
+    background-color: rgba(41, 67, 125, 1);
+    background-image: radial-gradient(circle, rgba(41, 67, 125, 1) 0%, rgba(179, 123, 40, 1) 96%);
+  }
+  .user-card {
+    border: 5px solid black;
+    padding: 5vh;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 1vh;
+    width: 50%;
+    margin-bottom: 2vh;
+  }
+  .user-container {
+    padding: 20vh;
+    font-family: Arial, sans-serif;
   }
 }
