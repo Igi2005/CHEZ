@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MainPage } from '../src/Pages/MainPage';
-import { describe, test, expect, beforeEach } from '@jest/globals';
+import { describe, test, expect } from '@jest/globals';
 import '@testing-library/jest-dom/';
 
 

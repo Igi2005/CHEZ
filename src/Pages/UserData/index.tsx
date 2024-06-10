@@ -6,6 +6,9 @@ import axios from "axios";
 import  './UserData_style.scss'
 import bambi from "../../assets/bambi - IRL.mp3"
 import dogi from "../../assets/tapeta.jpg"
+import React from "react";
+
+
 export default function UserData() {
     const location = useLocation();
     const action = location.state?.send;
@@ -63,7 +66,7 @@ export default function UserData() {
         window.location.reload();
     }
     return (
-        <div>
+        <div data-testid="userData">
             <Header/>
             <div id="mainUser">
                 {action != null && action != undefined && id != null ? (
@@ -80,7 +83,7 @@ export default function UserData() {
                             {userData.slice().reverse().map((weaponItem, index) => (
                             <li key={index}>
                                 <div className="one-item">
-                                    <img src={weaponItem.img}/>
+                                    <img role='img' src={weaponItem.img}/>
                                     <p>
                                         {`Nazwa: ${weaponItem.name}, Cena: ${weaponItem.cena}`}
                                         <hr/>

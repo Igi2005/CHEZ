@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import axios from 'axios';
 import SignUp from '../src/Pages/SingUpPage';
-import { describe, test, expect, beforeEach } from '@jest/globals';
+import { describe, test, expect, afterEach } from '@jest/globals';
 import '@testing-library/jest-dom'
 
 
