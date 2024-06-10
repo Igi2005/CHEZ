@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const router = require('../SignUpPage/index.js'); // Replace 'yourRouterFile' with the actual file name where your router is defined.
+const router = require('../SignUpPage/index.js'); 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -40,7 +40,6 @@ describe('POST /signup', () => {
     }, 10000);
 
     test('Signup with existing email', async () => {
-        // Create a user with known email
         await prisma.users.create({
             data: {
                 name: 'Jane',
@@ -56,7 +55,7 @@ describe('POST /signup', () => {
             .send({
                 UserName: 'John',
                 UserSurname: 'Doe',
-                UserEmail: 'jane@example.com', // Same email as above
+                UserEmail: 'jane@example.com', 
                 UserPass: 'password123',
                 UserNick: 'johndoe'
             });

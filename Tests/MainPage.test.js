@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const router = require('../MainPage'); // Assuming the provided code is in a file named 'router.js'
+const router = require('../MainPage'); 
 
 describe('Router', () => {
   let app;
@@ -20,7 +20,7 @@ describe('Router', () => {
     });
 
     it('should return an error message if there is a database error', async () => {
-      // Mock the prisma.skrzynki.findMany function to throw an error
+      
       const mockFindMany = jest.fn().mockRejectedValue(new Error('Database error'));
       jest.mock('@prisma/client', () => ({
         PrismaClient: jest.fn().mockImplementation(() => ({
