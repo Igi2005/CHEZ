@@ -10,6 +10,78 @@ let globalNick = null
 let globalBalans = null
 let globalId = null
 
+router.post('/sellitems',async(req,res)=>{
+    const data = req.body
+    const gunID = data.idG
+    const transactionID = data.idT
+    const money = data.price
+    const sell = await prisma.ekwipunek.delete({
+        where : {
+            id_broni: gunID,
+            id_operacji: transactionID,
+        }
+    })
+    const updateBalance = await prisma.users.update({
+        where : {
+            id: globalId
+        },
+        data: {
+            balans: {
+                increment: money 
+            }
+        }
+    })
+    globalBalans = globalBalans + money
+    if(sell) console.log("usuneło niby")
+    else console.log("nie usuneło")
+    
+})
+
+router.get('/getitems',async(req,res)=>{
+    if(globalId != null) {
+        console.log("globalId != null id to " + globalId)
+        const getUniqueData = await prisma.ekwipunek.findMany({
+            where:{
+                id_usera : globalId
+            }  
+        })
+        //console.log(getUniqueData)
+        const userData = await prisma.users.findUnique({
+            where :{
+                id : globalId
+            }
+        })
+        const weaponsData = [];
+        for (const userWeapon of getUniqueData) {
+          const weaponData = await prisma.images.findUnique({
+            where: {
+              id: userWeapon.id_broni,
+            },
+          });
+          if (weaponData) {
+            weaponsData.push({ ...weaponData, id_operacji: userWeapon.id_operacji });
+          }
+        }
+        //console.log('Dane broni:', weaponsData);
+        res.json({data : weaponsData, id : globalId, userData : userData})
+    }
+})
+
+router.get('/getaddeddata/:action',async(req,res) =>{
+    const gunName = req.params.action
+    console.log("gunName to " + gunName)
+    const getUniqueData = await prisma.images.findFirst({
+        where : {
+            name : gunName
+        }
+    })
+    console.log("--------------------------------")
+    console.log(getUniqueData)
+    console.log("--------------------------------")
+    res.json({data : getUniqueData})
+})
+
+
 router.get('/openbox',async(req,res) => {
     //console.log("openbox")
     res.json({data : globalNick, balans : globalBalans})
@@ -75,6 +147,7 @@ router.get('/login/nickname',async(req,res)=>{
 router.get('/login/logout',async(req,res)=>{
     globalNick = null
     globalBalans = null
+    globalId = null
     console.log("mamy req wylogowanie sie "  + globalNick)
 })
 
