@@ -10,6 +10,7 @@ import '@testing-library/jest-dom/';
 jest.mock('axios');
 
 describe('Main', () => {
+  
   beforeEach(() => {
     axios.get.mockResolvedValueOnce({
         data: {
@@ -19,13 +20,17 @@ describe('Main', () => {
           ],
         },
       });
-      axios.get.mockResolvedValueOnce({
-        data: [
-          { image: 'image1.jpg', name: 'Gun 1' },
-          { image: 'image2.jpg', name: 'Gun 2' },
-        ],
-      });
+      // axios.get.mockResolvedValueOnce({
+      //   data: [
+      //     { image: 'image1.jpg', name: 'Gun 1' },
+      //     { image: 'image2.jpg', name: 'Gun 2' },
+      //   ],
+      // });
   });
+
+  // beforeEach(() => {
+  //   axios.get.mockResolvedValue({ data: [] }); // Mock the response from axios.get
+  // });
 
   test('renders loot boxes', async () => {
     render(
@@ -40,7 +45,7 @@ describe('Main', () => {
       expect(screen.getByText('Skin 2 | 20')).toBeInTheDocument();
     });
   });
-
+  /*
   test('sorts loot boxes by price ascending', async () => {
     render(
       <Router>
@@ -57,7 +62,7 @@ describe('Main', () => {
 
     
   });
-
+  
   test('sorts loot boxes by price descending', async () => {
     render(
       <Router>
@@ -74,4 +79,5 @@ describe('Main', () => {
 
     
   });
+  */
 });

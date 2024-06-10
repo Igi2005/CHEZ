@@ -89,7 +89,7 @@ function SignUp() {
                     <RiLockPasswordFill className="icons"/>
                 </div>
                 {IsPassword && <Error message="Hasło nie może być puste!"></Error>}
-                <input type="submit" value="Stwórz konto" id="login_btn"/>
+                <input type="submit" value="Stwórz konto" id="signBtn"/>
                 {Err && <Error message="Podany adres email istnieje w bazie danych nie można stworzyć konta"></Error>}
             </form>
         </div>)

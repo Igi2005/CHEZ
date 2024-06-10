@@ -58,10 +58,10 @@ describe('OpenBox', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Otwórz' })).toBeInTheDocument();
+      expect(screen.getByRole('button')).toBeInTheDocument();
     });
 
-    userEvent.click(screen.getByRole('button', { name: 'Otwórz' }));
+    userEvent.click(screen.getByRole('button'));
 
     await waitFor(() => {
       expect(screen.getAllByAltText('Zdjęcie 1')[0]).toBeInTheDocument();

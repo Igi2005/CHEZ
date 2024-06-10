@@ -188,8 +188,8 @@ export function OpenBox() {
                     <div>
                         {test === null || test === undefined ? (
                             <p style={logoStyle}>Zaloguj sie żeby otworzyć tą skrzynkę !</p>
-                            ) : (balans > skrzynka.cena ? (
-                            <button onClick={startAnimation} id="btn_open">Otwórz</button>
+                            ) : (balans >= skrzynka.cena ? (
+                            <button role="button" onClick={startAnimation} id="btn_open">Otwórz</button>
                             ):(<p style={logoStyle}>Nie masz siana stary/stara !</p>)
                             
                         )}

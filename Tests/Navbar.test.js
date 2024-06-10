@@ -23,31 +23,25 @@ describe('Navbar Component', () => {
     expect(navbarElement).toBeInTheDocument();
   });
 
-  test('expands and collapses on click', () => {
-    render(<UserProvider>
-        <Router>
-          <Navbar />
-        </Router>
-      </UserProvider>);
+  test('toggles the menu icon on click', () => {
+    render(
+      <Router>
+        <Navbar />
+      </Router>
+    );
+    const dropdownToggle = screen.getByRole('button');
+    const menuIcon = screen.getByTestId('menu-icon');
+    const closeIcon = screen.getByTestId('close-icon');
 
-    // Ensure initial state is collapsed
-    const collapsedContent = screen.queryByTestId('navbarr');
-    console.log(collapsedContent);
-    expect(collapsedContent).toHaveAttribute('aria-hidden', 'true');
+    // Initially, the menu icon should be visible
+    expect(menuIcon).toBeVisible();
+    expect(closeIcon).not.toBeVisible();
 
-    // Click on the navbar toggle
-    const navbarToggle = screen.getByTestId('navbar_toggle');
-    fireEvent.click(navbarToggle);
+    // Click the dropdown toggle
+    fireEvent.click(dropdownToggle);
 
-    // Ensure content is expanded after click
-    const expandedContent = screen.queryByTestId('navbarr');
-    expect(expandedContent).toHaveAttribute('aria-hidden', 'false');
-
-    // Click again on the navbar toggle
-    fireEvent.click(navbarToggle);
-
-    // Ensure content is collapsed again
-    expect(collapsedContent).toHaveAttribute('aria-hidden', 'true');
-
+    // The close icon should now be visible, and the menu icon should be hidden
+    expect(menuIcon).not.toBeVisible();
+    expect(closeIcon).toBeVisible();
   });
 });

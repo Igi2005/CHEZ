@@ -1,9 +1,8 @@
 import "./Main_style.scss";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-
 
 interface Gun {
     id_skrzynki: number;
@@ -15,22 +14,21 @@ interface Gun {
 export function Main() {
     const [records, setRecords] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
-    const [names, setNames] = useState([]);
-    const [guns, setGuns] = useState([]);
+    const [names, setNames] = useState<string[]>([]);
+    const [guns, setGuns] = useState<string[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [data, setData] = useState([]);
-    const [balans, setBalans] = useState([])
+    const [balans, setBalans] = useState(0);
     const [guns2, setGuns2] = useState<Gun[]>([]);
     const navigate = useNavigate();
-    const [choice,setChoice] = useState(true)
-    const [choice2, setChoice2] = useState(false)
-    
+    const [choice, setChoice] = useState(true);
+    const [choice2, setChoice2] = useState(false);
+
     useEffect(() => {
         axios.get('http://localhost:3000/')
             .then(response => {
                 if (response.data && response.data.data) {
                     setData(response.data.data);
-                    //console.log(response.data.data); // Przeniesienie console.log tutaj
                 } else {
                     console.error('Błąd w bazie danych');
                 }
@@ -38,28 +36,24 @@ export function Main() {
             .catch(error => {
                 console.error('Błąd serwera: ', error.message);
             });
-
     }, []);
-    console.log(data);
 
     useEffect(() => {
         axios.get('https://bymykel.github.io/CSGO-API/api/en/skins_not_grouped.json')
             .then(res => {
                 setRecords(res.data);
                 setIsDataLoaded(true);
-                //console.log(records)  
             })
             .catch(err => console.log(err));
     }, []);
 
     useEffect(() => {
         if (isDataLoaded) {
-            const namesArray: SetStateAction<never[]> = [];
-            const namesGun: SetStateAction<never[]> = [];
+            const namesArray: string[] = [];
+            const namesGun: string[] = [];
             for (let i = 0; i < 40; i++) {
                 const randomIndex = Math.floor(Math.random() * records.length);
                 const record = records[randomIndex];
-                console.log(record);
                 namesArray.push(record['image']);
                 namesGun.push(record['name']);
             }
@@ -69,74 +63,48 @@ export function Main() {
     }, [isDataLoaded, records]);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % names.length);
-        }, 1000);
+        if (names.length > 0) {
+            const intervalId = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % names.length);
+            }, 1000);
 
-        return () => clearInterval(intervalId);
+            return () => clearInterval(intervalId);
+        }
     }, [names.length]);
 
     function SortAsc() {
-        setChoice2(false)
-        setChoice(true)
-        //console.log("data----------------- " + data);
-        //console.log(data[1].cena);
-        for (let i = 0; i < data.length - 1; i++) {
-            for (let j = 0; j < data.length - 1; j++) {
-                if (Number(data[j].cena) < Number(data[j + 1].cena)) {
-                    let temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
-                }
-            }
-        }
-        //console.log(data);
+        setChoice2(false);
+        setChoice(true);
+        const sortedData = [...data].sort((a, b) => b.cena - a.cena);
+        setData(sortedData);
     }
 
     function SortDesc() {
-        setChoice2(false)
-        setChoice(true)
-        for (let i = 0; i < data.length - 1; i++) {
-            for (let j = 0; j < data.length - 1; j++) {
-                if (Number(data[j].cena) > Number(data[j + 1].cena)) {
-                    let temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
-                }
-            }
-        }
+        setChoice2(false);
+        setChoice(true);
+        const sortedData = [...data].sort((a, b) => a.cena - b.cena);
+        setData(sortedData);
     }
-    const help: Gun[] = [];
-    useEffect(()=>{
+
+    useEffect(() => {
         axios.get('http://localhost:3000/openbox')
-        .then(res => {
-            setBalans(res.data.balans)
-            console.log(balans)
-        })
-        .catch(err => console.log(err));
-    },[])
+            .then(res => {
+                setBalans(res.data.balans);
+            })
+            .catch(err => console.log(err));
+    }, []);
 
     function Avaible() {
-        for(let i = 0; i < data.length;i++) {
-            console.log(data[i].cena)
-            if(Number(balans) >= Number(data[i].cena)) {
-                help.push({
-                    id_skrzynki: data[i].id_skrzynki,
-                    img: data[i].img,
-                    nazwa: data[i].nazwa,
-                    cena: data[i].cena
-                });
-            } 
-        }
-        setGuns2(help);
-        setChoice(false)
-        setChoice2(true)
+        const availableGuns = data.filter(item => Number(balans) >= Number(item.cena));
+        setGuns2(availableGuns);
+        setChoice(false);
+        setChoice2(true);
     }
 
-    function OpenBox(index:number) {
-        navigate('/openbox',{ state: { index} });
+    function OpenBox(index: number) {
+        navigate('/openbox', { state: { index } });
     }
-    
+
     const randomCrateImage = names.length > 0 ? names[Math.floor(Math.random() * names.length)] : '';
 
     return (
@@ -150,6 +118,7 @@ export function Main() {
                                 <div id="one_photo" key={index}>
                                     <p className="nameOfGun">{guns[index]}</p>
                                     <img
+                                        role='img'
                                         className="header_photos"
                                         src={names[index]}
                                         alt={`Zdjęcie ${index + 1}`}
@@ -199,21 +168,17 @@ export function Main() {
                         <p className="err_main">Zaloguj się!</p>
                     )
                 ) : choice2 ? (
-                    balans !== null ? (
-                        guns2.length > 0 ? (
-                            <ul className="lootBoxContainer">
-                                {guns2.map(item => (
-                                    <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
-                                        <img src={item.img} alt={item.nazwa} />
-                                        <p>{item.nazwa} | {item.cena}</p>
-                                    </div>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p className="err_main">Masz za mało kaski</p>
-                        )
+                    guns2.length > 0 ? (
+                        <ul className="lootBoxContainer">
+                            {guns2.map(item => (
+                                <div className="lootBox" id={item.id_skrzynki} key={item.id_skrzynki} onClick={() => OpenBox(item.id_skrzynki)}>
+                                    <img src={item.img} alt={item.nazwa} />
+                                    <p>{item.nazwa} | {item.cena}</p>
+                                </div>
+                            ))}
+                        </ul>
                     ) : (
-                        <p className="err_main">Zaloguj sie !</p>
+                        <p className="err_main">Masz za mało kaski</p>
                     )
                 ) : (
                     <ul className="lootBoxContainer">
@@ -225,8 +190,7 @@ export function Main() {
                         ))}
                     </ul>
                 )}
-
-                </div>
-                </div>
-                        );
+            </div>
+        </div>
+    );
 }

@@ -15,18 +15,22 @@ export default function UserData() {
     const [data,setData] = useState<any[]>([]);
     const [userData,setUserData] = useState<any[]>([]);
     const [id,setId] = useState(null)
+    const [test, setTest] = useState(false)
     useEffect(()=>{
         if(action != null && action != undefined) {
+            console.log("in useEffect action " + action)
             axios.get(`http://localhost:3000/getaddeddata/${action}`)
             .then(res =>{
                     setData(res.data.data)
-                    
+                    setTest(true)
+                    console.log(data.length)
             })
             .catch(err => {
                 console.error('Błąd serwera: ', err.message); 
             })
         }
     },[])
+    console.log(data.length)
 
     useEffect(()=>{
         axios.get(`http://localhost:3000/getitems`)
@@ -47,6 +51,7 @@ export default function UserData() {
     },[])
 
     function sellItem(idOfGun:number,idTransaction:number,priceGun) {
+        setTest(false)
         const idG = idOfGun
         const idT = idTransaction
         const priceG = priceGun
@@ -56,6 +61,8 @@ export default function UserData() {
             idT : idT,
             price : priceG
         }
+        const hide = document.getElementsByClassName("user-card")
+        hide[0].setAttribute("style",`display:none`)
         axios.post(`http://localhost:3000/sellitems`,Data)
         .then(res =>{
             console.log("sold item")
@@ -69,9 +76,10 @@ export default function UserData() {
         <div data-testid="userData">
             <Header/>
             <div id="mainUser">
-                {action != null && action != undefined && id != null ? (
+                {action != null && action != undefined && id != null  ? (
+                    console.log("in {}" + data.length),
                     <div className="user-card pulse-effect">
-                        <p id="won">Gratulacje wygrałes !</p>
+                        <p id="won">Ostatnia wygrana !</p>
                         <h2>{data.name}</h2>
                         <img src={data.img} alt={data.name} />
                         <p>Cena: {data.cena} PLN</p>

@@ -43,6 +43,7 @@ h1 {
   height: 5vh;
   margin-bottom: 4%;
   margin-top: 4%;
+
 }
 
 input {
@@ -51,19 +52,35 @@ input {
   background: transparent;
   border-radius: 40px;
   border: 2px solid black;
-  padding: 2vh;
+  //padding: 2vh;
+  padding-left: 2vh;
 }
 
 input::placeholder {
   color: black;
 }
 
-#login_btn {
+#signBtn {
+  padding-right: 2vh;
   width: 100%;
   height: 4vh;
   padding-bottom: 3vh;
   margin-bottom: 4%;
   margin-top: 4%;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    55deg,
+    hsl(37deg 100% 36%) 0%,
+    hsl(36deg 91% 33%) 7%,
+    hsl(35deg 84% 30%) 15%,
+    hsl(34deg 78% 27%) 25%,
+    hsl(34deg 72% 23%) 37%,
+    hsl(33deg 66% 19%) 53%,
+    hsl(32deg 59% 16%) 68%,
+    hsl(32deg 53% 12%) 81%,
+    hsl(33deg 47% 8%) 91%,
+    hsl(0deg 0% 2%) 100%
+  );
 }
 
 /* Media Queries for mobile */
@@ -92,15 +109,15 @@ input::placeholder {
   }
 
   input {
-      padding: 1vh;
+      padding: 2vh;
   }
 
-  #login_btn {
+  /*#login_btn {
       height: auto;
       padding: 10px;
       margin-bottom: 2%;
       margin-top: 2%;
-  }
+  }*/
 }
 
 

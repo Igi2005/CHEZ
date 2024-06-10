@@ -21,13 +21,13 @@ export function Navbar() {
     }
   }
   return (
-    <div className="navbar">
+    <div className="navbar" data-testid="navbarr">
       <Dropdown onClick={Swap}>
-        <Dropdown.Toggle /*variant="success"*/ id="btnNav" >
+        <Dropdown.Toggle /*variant="success"*/ id="btnNav" data-testid='close-icon' >
             {stan ?  <IoCloseCircleOutline className="icons_nav"/>: <TiThMenuOutline className="icons_nav"/> }
         </Dropdown.Toggle>
 
-        <Dropdown.Menu className='nav_menu'>
+        <Dropdown.Menu className='nav_menu' data-testid='menu-icon'>
             {routes
             .filter(route => route.path !== '/openbox')
             .map((route) => (
