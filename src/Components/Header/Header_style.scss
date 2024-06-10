@@ -4,7 +4,7 @@
   height: 15vh;
   padding-top: 2vh;
   margin-bottom: 5vh;
-  align-items: center; /* Center elements vertically */
+  align-items: center; 
 }
 
 #app_name {
@@ -34,14 +34,14 @@
   display: flex;
   width: 60%;
   position: relative;
-  align-items: center; /* Center elements vertically */
+  align-items: center; 
 }
 
 #right {
   width: 40%;
   display: flex;
   justify-content: flex-end;
-  align-items: center; /* Center elements vertically */
+  align-items: center; 
 }
 
 .nickname {
@@ -99,7 +99,7 @@
   font-size: 1.2em;
 }
 
-/* Media Queries for mobile */
+
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
