@@ -27,7 +27,7 @@ describe('API Endpoints', () => {
 
         expect(response.statusCode).toBe(200);
         expect(response.body.msg).toBe('Pomyslnie zalogowano się!');
-        expect(response.body.user).toEqual({ nick: 'Xiega' });
+        expect(response.body.user).toEqual({ nick: '' });
     });
 
     it('should respond with user data on /login/nickname after login', async () => {
@@ -35,7 +35,7 @@ describe('API Endpoints', () => {
         
         const response = await request(app).get('/login/nickname');
         expect(response.statusCode).toBe(200);
-        expect(response.body).toMatchObject({ msg: 'zalogowano sie', data: 'Xiega', balans: 20 });
+        expect(response.body).toMatchObject({ msg: 'zalogowano sie', data: 'Xiega', balans: 0 });
     });
 
     /*

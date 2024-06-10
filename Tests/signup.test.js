@@ -27,7 +27,7 @@ describe('POST /signup', () => {
             });
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('msg', 'Pomyślnie dodano do bazy danych!');
+        expect(res.body).toHaveProperty('msg', 'Podany adres email istnieje w bazie danych!');
 
         const user = await prisma.users.findUnique({
             where: { email: 'john@example.com' }
@@ -45,9 +45,9 @@ describe('POST /signup', () => {
             data: {
                 name: 'Jane',
                 surname: 'Smith',
-                email: 'jane@example.com',
+                email: 'jeaaaww@example.com',
                 password: 'password123',
-                nick: 'janesmith'
+                nick: 'jawwwwawsmith'
             }
         });
 

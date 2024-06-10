@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +17,11 @@
     "prisma": "^5.11.0",
     "super": "^0.2.3",
     "supertest": "^7.0.0"
-  }
+  },
+  "jest": {
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "*.js"
+        ]
+    }
 }

@@ -423,7 +423,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `balans`, `nick`) VALUES
-(1, 'Xiega', 'Szefowski', 'xiega@wp.pl', 'qwerty', 0, ''),
+(1, 'Xiega', 'Szefowski', 'xiega@wp.pl', 'qwerty', 1110, ''),
 (4, 'poniat', 'poniat2', 'poniat@wp.pl', 'qwerty', 843471, 'poniato');
 
 --

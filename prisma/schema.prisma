@@ -15,6 +15,7 @@ model ekwipunek {
   images      images @relation(fields: [id_broni], references: [id], onUpdate: Restrict, map: "ekwipunek_ibfk_2")
 
   @@index([id_broni], map: "id_broni")
+  @@index([id_usera], map: "ekwipunek_ibfk_1")
 }
 
 model images {
