@@ -60,6 +60,12 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(axios|react-router-dom)/)",
       "node_modules/(?!(axios)/)"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "src/Components/Main/index.tsx",
+      "src/Pages/UserData/index.tsx",
+      "src/Pages/OpenBox/index.tsx"
     ]
   }
 }

@@ -24,10 +24,10 @@ export function Navbar() {
     <div className="navbar" data-testid="navbarr">
       <Dropdown onClick={Swap}>
         <Dropdown.Toggle /*variant="success"*/ id="btnNav" data-testid='close-icon' >
-            {stan ?  <IoCloseCircleOutline className="icons_nav"/>: <TiThMenuOutline className="icons_nav"/> }
+            {stan ?  <IoCloseCircleOutline className="icons_nav" data-testid='menu-icon-off'/>: <TiThMenuOutline className="icons_nav" data-testid='menu-icon-on'/> }
         </Dropdown.Toggle>
 
-        <Dropdown.Menu className='nav_menu' data-testid='menu-icon'>
+        <Dropdown.Menu className='nav_menu' >
             {routes
             .filter(route => route.path !== '/openbox')
             .map((route) => (

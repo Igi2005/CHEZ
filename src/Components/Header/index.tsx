@@ -54,7 +54,7 @@ export function Header() {
                     <div className="nickname" data-testid="nickname">
                         Zalogowano: {nickName}<br/>
                         Balans: {balans}
-                        <button onClick={LogOut}>Wyloguj sie!</button>
+                        <button onClick={LogOut} data-testid="logoutt">Wyloguj sie!</button>
                     </div>
                 ) : (
                     <div className="nickname2">

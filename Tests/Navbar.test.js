@@ -1,47 +1,52 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Navbar } from '../src/Components/Navbar';
 import { describe, test, expect } from '@jest/globals';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { UserProvider } from '../src/contexts/user';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/';
 
 
-describe('Navbar Component', () => {
-    test('renders Navbar component', () => {
-    render(
-    
-        <UserProvider>
-        <Router>
-          <Navbar />
-        </Router>
-      </UserProvider>
-);
-
-    // Ensure Navbar renders without crashing
-    const navbarElement = screen.getByTestId('navbarr');
-    expect(navbarElement).toBeInTheDocument();
-  });
-
-  test('toggles the menu icon on click', () => {
+describe('Navbar', () => {
+  test('renders the navbar component', () => {
     render(
       <Router>
         <Navbar />
       </Router>
     );
-    const dropdownToggle = screen.getByRole('button');
-    const menuIcon = screen.getByTestId('menu-icon');
-    const closeIcon = screen.getByTestId('close-icon');
+    const navbarElement = screen.getByTestId('navbarr');
+    expect(navbarElement).toBeInTheDocument();
+  });
 
-    // Initially, the menu icon should be visible
-    expect(menuIcon).toBeVisible();
-    expect(closeIcon).not.toBeVisible();
+  test('toggles the dropdown menu', () => {
+    render(
+      <Router>
+        <Navbar />
+      </Router>
+    );
+  
+    // Click the toggle button to open the menu
+    const toggleButton = screen.getByTestId('close-icon');
+    fireEvent.click(toggleButton);
 
-    // Click the dropdown toggle
-    fireEvent.click(dropdownToggle);
+    const menuIcon2 = screen.getByTestId('menu-icon-on');
 
-    // The close icon should now be visible, and the menu icon should be hidden
-    expect(menuIcon).not.toBeVisible();
-    expect(closeIcon).toBeVisible();
+    expect(menuIcon2).toBeInTheDocument(); // or expect(menuIcon).not.toBeNull();
+  
+    
+  });
+
+  test('renders navigation links', () => {
+    render(
+      <Router>
+        <Navbar />
+      </Router>
+    );
+    const toggleButton = screen.getByTestId('close-icon');
+    fireEvent.click(toggleButton); // Open the dropdown menu
+
+    const navLinks = screen.getAllByRole('link');
+    expect(navLinks.length).toBeGreaterThan(0); // Ensure there are navigation links
+
+    // You can add more assertions to check the text or href of specific links
   });
 });

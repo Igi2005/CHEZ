@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1718021734365" clover="3.2.0">
+  <project timestamp="1718021734365" name="All files">
+    <metrics statements="102" coveredstatements="90" conditionals="59" coveredconditionals="56" methods="23" coveredmethods="17" elements="184" coveredelements="163" complexity="0" loc="102" ncloc="102" packages="9" files="9" classes="9"/>
+    <package name="Components.Error">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Components\Error\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="9" count="9" type="stmt"/>
+      </file>
+    </package>
+    <package name="Components.Footer">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Components\Footer\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="13" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="Components.Header">
+      <metrics statements="20" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="7" coveredmethods="3"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Components\Header\index.tsx">
+        <metrics statements="20" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="7" coveredmethods="3"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="Components.Navbar">
+      <metrics statements="9" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Components\Navbar\index.tsx">
+        <metrics statements="9" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="12" count="13" type="stmt"/>
+        <line num="13" count="11" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="23" count="11" type="stmt"/>
+        <line num="32" count="55" type="stmt"/>
+        <line num="34" count="44" type="stmt"/>
+      </file>
+    </package>
+    <package name="Functions">
+      <metrics statements="9" coveredstatements="9" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
+      <file name="SkinFloatToName.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Functions\SkinFloatToName.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="2" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="11" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="Pages.LoginPage">
+      <metrics statements="26" coveredstatements="25" conditionals="16" coveredconditionals="15" methods="4" coveredmethods="3"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Pages\LoginPage\index.tsx">
+        <metrics statements="26" coveredstatements="25" conditionals="16" coveredconditionals="15" methods="4" coveredmethods="3"/>
+        <line num="17" count="9" type="stmt"/>
+        <line num="18" count="9" type="stmt"/>
+        <line num="19" count="9" type="stmt"/>
+        <line num="20" count="9" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="31" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="34" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="59" count="9" type="stmt"/>
+      </file>
+    </package>
+    <package name="Pages.MainPage">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Pages\MainPage\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="9" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="Pages.SingUpPage">
+      <metrics statements="34" coveredstatements="33" conditionals="25" coveredconditionals="25" methods="4" coveredmethods="3"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Pages\SingUpPage\index.tsx">
+        <metrics statements="34" coveredstatements="33" conditionals="25" coveredconditionals="25" methods="4" coveredmethods="3"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="34" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="37" count="3" type="cond" truecount="7" falsecount="0"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="51" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="54" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="63" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="Routing">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.tsx" path="C:\buda\czwartaklasa4D\webowe\projektPalacz\CHEZ\Front\src\Routing\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="18" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

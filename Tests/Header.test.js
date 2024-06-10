@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent, getByTestId, act} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
@@ -95,4 +95,6 @@ describe('Header', () => {
 
     expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/login/nickname');
   });
+
+
 });
